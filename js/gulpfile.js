@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
-var pkg = require('./package.json');
+var pkg = require('package.json');
 
 // Copy vendor files from /node_modules into /vendor
 // NOTE: requires `npm install` before running!
