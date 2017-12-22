@@ -17,13 +17,21 @@ module.exports = function(grunt) {
 
   grunt.config.set('less', {
     dev: {
-      files: [{
-        expand: true,
-        cwd: 'assets/styles/',
-        src: ['importer.less'],
-        dest: '.tmp/public/styles/',
-        ext: '.css'
-      }]
+      // files: [{
+      //   expand: true,
+      //   cwd: 'assets/styles/',
+      //   src: ['importer.less',],
+      //   dest: '.tmp/public/styles/',
+      //   ext: '.css'
+      // },]
+      
+      // options:{
+      //   paths:['assets/styles']
+      // },
+      // file:{
+      //   '/styles/mixins/animations.css':'/styles/mi',
+      //   '/styles/loading-spinner.css':'/styles/loading-spinner.less'
+      // }
     }
   });
 

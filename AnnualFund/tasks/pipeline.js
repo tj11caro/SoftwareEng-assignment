@@ -18,6 +18,7 @@
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
   'styles/**/*.css'
+   // ,'assets/styles/importer.less'
 ];
 
 
@@ -29,7 +30,7 @@ var jsFilesToInject = [
   'js/dependencies/sails.io.js',
 
   // Dependencies like jQuery, or Angular are brought in here
-  'js/dependencies/angular.1.3.js',
+  'js/dependencies/angular.1.6.7.js',
   'js/dependencies/**/*.js',
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
