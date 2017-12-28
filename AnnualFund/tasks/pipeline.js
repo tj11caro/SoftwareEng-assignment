@@ -17,7 +17,7 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
-  'styles/**/*.css'
+  'styles/**/*.css',
    // ,'assets/styles/importer.less'
 ];
 
@@ -35,7 +35,7 @@ var jsFilesToInject = [
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
   'js/public/signup/SignupModule.js',
-  'js/**/*.js'
+  'js/public/**/*.js'
 ];
 
 
