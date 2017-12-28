@@ -1,0 +1,18 @@
+.bg-siena{
+    background-color: #00594d !important; 
+}
+.bg-siena .mb-0{
+    color: white !important; 
+}
+
+.bg-siena .fa{
+    color:#00392d !important; 
+}
+
+.bg-siena .fa.active{
+    color:#fff !important; 
+}
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: rgb(224, 179, 28);
+}

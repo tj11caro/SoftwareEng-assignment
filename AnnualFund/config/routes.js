@@ -32,8 +32,12 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  'GET /signup': {view:'signup'}
-
+  //'GET /homepage': {view:'homepage'},
+  'GET /signup': {view:'signup'},
+  'GET /homepage': {view:'homepage'},
+  'GET /': {view:'homepage'},  
+  'GET /index': {view:'/sb-admin/index.html'}, 
+  'GET /page': {view:'sb-admin-layout/view-tester'},  
   /*
     '/': {
       view: 'homepage'

@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-    
+ 
     /*
 	list:function(req,res){
         Volunteer.find({}).exec(function(err,lafapi){
