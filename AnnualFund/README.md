@@ -4,15 +4,15 @@
 <li>Clone Repo
 </li><li>I <b>Strongly Encourage downloading Visual Studio Code</b> (not Visual Studio) better than brackets in every way <i>and can be easily modded to have the same look and feel as Brackets</i>
 </li><li>You will need NodeJs to be installed on your system <i>This means install globally</i>. For Reasons such as Node gives you the npm commands. 
-</li><li>You will also need to have an Apache and MySql application running. <i>This is for future implementation of the db, which hasn't been implemented yet. But This is necessary for starting (unless alterations are made to the <code>config/connnections.js</code>)</i>. All t
-  <ul><h5>This means you will need to set up a dbms and the db.<h5>
+</li><li>You will also need to have an Apache and MySql application running. <i>This is for future implementation of the db, which hasn't been implemented yet. But this is necessary for starting the server (unless alterations are made to the <code>config/connnections.js</code>)</i>. 
+  <ul><h5>This means you will need to set up a dbms and the db.</h5>
     <li>I use XAMPP. Google xampp. Should come up, download it. 
     </li><li>Run Apache 
     </li><li>Run MySQL
     </li><li>See that everything is up and running by hitting the admin button
     </li><li>It will open a local page. Go to phpMyAdmin
     </li><li><i>At this point we are entering into uncharted territory.</i> You may have to create a database to mimic the one expected by the program. The name is annualfund and can be seen in the <code>config/connnections.js</code>. 
-    </li>
+    </li><br>
     One thing to note at this point is that this is one setup that allows for MySQL and phpMyAdmin to work with sails. But sails allows for other database systems such as Mongodb. Both of which I have worked with. 
   </ul>
   </li><li>I think at this point we should have all the necessary applications installed. XAMPP, Visual Studio Code (VSC), and NodeJS/NPM. So lets continue.
