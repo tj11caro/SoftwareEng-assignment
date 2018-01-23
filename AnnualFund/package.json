@@ -2,10 +2,11 @@
   "name": "AnnualFund",
   "private": true,
   "version": "0.0.0",
-  "description": "a Sails application",
+  "description": "Siena College Annual Fund Application",
   "keywords": [],
   "dependencies": {
     "angular": "^1.6.7",
+    "bcrypt": "^1.0.3",
     "ejs": "2.3.4",
     "grunt": "1.0.1",
     "grunt-contrib-clean": "1.0.0",
@@ -27,6 +28,7 @@
     "require": "^2.4.20",
     "sails": "~0.12.14",
     "sails-disk": "~0.10.9",
+    "sails-mongo": "^0.12.2",
     "sails-mysql": "^0.11.5",
     "toastr": "^2.1.4"
   },
@@ -36,8 +38,7 @@
   },
   "main": "app.js",
   "repository": {
-    "type": "git",
-    "url": "git://github.com/anonymous node/sails user/AnnualFund.git"
+    "type": "git"
   },
   "author": "anonymous node/sails user",
   "license": ""

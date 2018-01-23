@@ -3,7 +3,7 @@
 
 <head>
     <title>
-        <%=typeof title == 'undefined' ? 'Siena College Annual Fund' : title%>
+        <%=typeof title == 'undefined' ? 'Zebra' : title%>
     </title>
 
     <!-- Viewport mobile tag for sensible mobile support -->
@@ -17,7 +17,7 @@
 
     <!-- Custom CSS -->
     <link href="/content/dist/css/sb-admin-2.css" rel="stylesheet">
-    
+
     <!-- Morris Charts CSS -->
     <link href="/content/vendor/morrisjs/morris.css" rel="stylesheet">
 
@@ -31,8 +31,11 @@
 
 <body>
     <div id="wrapper">
+        <!-- In future Use Session to allow this Menu -->
         <% include nav-menus.ejs %>
+        <div id="page-wrapper">
             <%- body %>
+        </div>
     </div>
 
     <!-- jQuery -->

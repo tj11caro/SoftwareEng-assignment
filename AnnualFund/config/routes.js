@@ -32,10 +32,38 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
+  'GET /gen/:page': {
+    controller:"GenController",
+    action:'show',
+    skipAsset:true,
+    locals: {
+      layout: 'gen/signin.ejs'
+    }
+  },
+  // 'GET //:page': {
+  //   controller:"GenController",
+  //   action:'show',
+  //   skipAsset:true,
+  //   locals: {
+  //     layout: 'gen/signin.ejs'
+  //   }
+  // },
+  'GET /session/new': {
+    view: 'new',
+    skipAsset:true,
+    locals: {
+      layout: 'gen/signin.ejs'
+    }
+  },
+  'GET /pages': {view:'sb-admin-layout/view-tester'},  
+  '/': { view: 'sb-admin-layout/pages/homepage' },
+  
+  
+  
   //'GET /homepage': {view:'homepage'},
-  'GET /signup': {view:'signup'},
-  'GET /homepage': {view:'homepage'},
-  'GET /': {view:'homepage'},  
+  //'GET /signup': {view:'signup'},
+  //'GET /homepage': {view:'homepage'},
+  'GET /': {view:'sb-admin-layout/view-tester'},  
   'GET /index': {view:'/sb-admin/index.html'}, 
   'GET /page': {view:'sb-admin-layout/view-tester'},  
   /*
