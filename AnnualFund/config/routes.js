@@ -48,6 +48,20 @@ module.exports.routes = {
   //     layout: 'gen/signin.ejs'
   //   }
   // },
+
+  'GET /admin':{
+    view:'sb-admin-layout/pages/admin/admin'
+    // function (req, res, next) {
+    //   console.log("preint");
+    //   next();
+    // }
+   },
+
+ 'GET /admin/:page':{
+  controller:"VolunteerAPIController",
+  action:'show',
+ },
+
   'GET /session/new': {
     view: 'new',
     skipAsset:true,

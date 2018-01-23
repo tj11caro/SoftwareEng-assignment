@@ -1,18 +1,22 @@
-.bg-siena{
+nav.navbar{
     background-color: #00594d !important; 
 }
-.bg-siena .mb-0{
+nav.navbar div.navbar-brand .brand{
     color: white !important; 
 }
 
-.bg-siena .fa{
+nav.navbar ul.navbar-top-links .fa{
     color:#00392d !important; 
 }
 
-.bg-siena .fa.active{
+nav.navbar ul.navbar-top-links li .fa.active{
     color:#fff !important; 
 }
 .nav>li>a:focus, .nav>li>a:hover {
     text-decoration: none;
     background-color: rgb(224, 179, 28);
+}
+
+div.alert-danger.serverr li{
+    margin: 10px;
 }
