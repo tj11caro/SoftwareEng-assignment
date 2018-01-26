@@ -7,12 +7,12 @@
 
 module.exports = {
  
-    show: function (req, res) {
-        var page=req.param('page');
-        // console.log(new Date());
-        // console.log(req.session.authenticated);
-        res.view('sb-admin-layout/pages/admin/'+page);
-      }
+    // show: function (req, res) {
+    //     var page=req.param('page');
+    //     // console.log(new Date());
+    //     // console.log(req.session.authenticated);
+    //     res.view('sb-admin-layout/pages/admin/'+page);
+    //   }
 
     /*
 	list:function(req,res){
