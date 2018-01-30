@@ -8,9 +8,9 @@
 module.exports = {
     show: function (req, res) {
         var page = req.param('page');
-        if (page == null) {
-            page = "admin";
-        }
+        // if (page == null) {
+        //     page = "admin";
+        // }
         AdminAPI.find({}).exec(function (err, admin) {
             if (err) {
                 res.send(500, { error: 'Database Error ERR#0002' });
