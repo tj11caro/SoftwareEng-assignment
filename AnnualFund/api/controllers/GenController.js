@@ -16,7 +16,7 @@ module.exports = {
     var page=req.param('page');
     // console.log(new Date());
     // console.log(req.session.authenticated);
-    res.view('gen/pages/'+page);
+    res.view('gen.ng/pages/'+page);
   }
 };
 
