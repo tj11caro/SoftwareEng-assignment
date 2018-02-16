@@ -1,6 +1,6 @@
 <?php 
-    require_once 'connectToTestDb.php';
-    $query="SELECT TestTextData FROM NickTest";
+require_once 'connect_to_perm_team1_2017.php'; 
+    $query="SELECT username, password, isAdmin, email FROM Users";
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);
     
     $arr = array();
