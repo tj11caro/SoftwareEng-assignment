@@ -1,12 +1,27 @@
 app.controller('MainController', ['$scope', '$http', function($scope, $http) {
-
-    $scope.title = '';
     
-    //In the controller, attach promo to $scope, and set its value to your own string.
-    $scope.promo = 'Keep Calm and Read a Book';
-
+//This function populates the userAccounts variable with all the user accounts in our current test Users table. 
+    $scope.getUserAccounts = function() {
+        $http.get("../../ajax/php/getUserAccounts.php")
+            .then(function(response) {
+                  $scope.userAccounts = response.data;
+            });
+    };
     
+//This function currently takes in a pidm, and a username/email and writes the username/email to the pidm's prospect in the database. 
+//It then refreshes prospects variable with the getProspects() function 
+    $scope.assign = function(pidmParam, userParam){
+        $http.post(
+            "../../ajax/php/assignUser.php", {
+                'pidm': pidmParam, 
+                'user': userParam
+            }
+        ).success(function(data){
+            $scope.getProspects();
+        });
+    };
     
+//This was the first function I wrote that interfaced with the database. It just grabs a title databas
     $scope.getTitle = function() {
         $http.get("../../ajax/php/getTitle.php")
             .then(function(response) {
@@ -14,14 +29,23 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
                   $scope.title = $scope.title[0].TestTextData;
             });
     };
-
-     //Retrieves all books from database and displays
-     $scope.show_data = function() {
-        $http.get("ajax/getBooks.php")
+    
+    $scope.getUsers = function() {
+        $http.get("../../ajax/php/getUsers.php")
             .then(function(response) {
-                $scope.products = response.data;
+                  $scope.users = response.data;
             });
     };
+    
+    $scope.getProspects = function() {
+        $http.get("../../ajax/php/getProspects.php")
+            .then(function(response) {
+                  $scope.prospects = response.data;
+            });
+    };
+    
+
+//******************************************* THE FOLLOWING ARE EXAMPLES FROM LAB 8 FOR IN TEXT REFERENCE *******************************************
 
     $scope.plusOne = function(id, likes, dislikes) {
         //Increment the likes value
@@ -42,6 +66,17 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
         });
     };
     
+
+     //Retrieves all books from database and displays
+     $scope.show_data = function() {
+        $http.get("ajax/getBooks.php")
+            .then(function(response) {
+                $scope.products = response.data;
+            });
+    };
+
+    
+    
     $scope.minusOne = function(id, likes, dislikes) {
         //Increment the likes value
         $scope.dislikes = Number(dislikes) + 1;
@@ -61,6 +96,7 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
         });
     };
 
+//******************************************* END LAB 8 EXAMPLES *******************************************
 
 }]);
 
