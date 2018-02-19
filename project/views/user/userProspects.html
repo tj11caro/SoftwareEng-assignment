@@ -20,93 +20,64 @@
   <link href="../../css/laf.css" rel="stylesheet">
 </head>
 
-<body ng-app="" class="fixed-nav sticky-footer bg-dark" id="page-top">
+<body ng-app="AnnualFund" class="fixed-nav sticky-footer bg-dark" id="page-top">
  
   <!-- Navigation-->
   <div ng-include="'user-nav.html'"></div>
   
-  <div class="content-wrapper">
+    
+    
+  <div ng-controller="MainController" class="content-wrapper" ng-init="getUserProspects()">
      <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="#">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Select Prospects</li>
+        <li class="breadcrumb-item active">View My Prospects</li>
       </ol>
       <!-- Example DataTables Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Data Table Example</div>
         <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
-                  <th>Start date</th>
-                  <th>Salary</th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
-                  <th>Start date</th>
-                  <th>Salary</th>
-                </tr>
-              </tfoot>
-              <tbody>
-                <tr>
-                  <td>Tiger Nixon</td>
-                  <td>System Architect</td>
-                  <td>Edinburgh</td>
-                  <td>61</td>
-                  <td>2011/04/25</td>
-                  <td>$320,800</td>
-                </tr>
-                <tr>
-                  <td>Garrett Winters</td>
-                  <td>Accountant</td>
-                  <td>Tokyo</td>
-                  <td>63</td>
-                  <td>2011/07/25</td>
-                  <td>$170,750</td>
-                </tr>
-                <tr>
-                  <td>Ashton Cox</td>
-                  <td>Junior Technical Author</td>
-                  <td>San Francisco</td>
-                  <td>66</td>
-                  <td>2009/01/12</td>
-                  <td>$86,000</td>
-                </tr>
-                <tr>
-                  <td>Cedric Kelly</td>
-                  <td>Senior Javascript Developer</td>
-                  <td>Edinburgh</td>
-                  <td>22</td>
-                  <td>2012/03/29</td>
-                  <td>$433,060</td>
-                </tr>
-                <tr>
-                  <td>Airi Satou</td>
-                  <td>Accountant</td>
-                  <td>Tokyo</td>
-                  <td>33</td>
-                  <td>2008/11/28</td>
-                  <td>$162,700</td>
-                </tr>
-              
-              </tbody>
-            </table>
-          </div>
-        </div>
+          <div class="col-lg-12">
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-table"></i> Prospect List</div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Grad Year</th>
+                      <th>Phone</th>
+<!--                      <th>Assigned User</th>-->
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Grad Year</th>
+                      <th>Phone</th>
+<!--                      <th>Assigned User</th>-->
+                      <th></th>
+                    </tr>
+                  </tfoot>
+                    <tbody>
+                    <tr ng-repeat="i in prospects">
+                      <td>{{ i.DONOR_FIRST_NAME }}</td>
+                      <td>{{ i.DONOR_LAST_NAME }}</td>
+                      <td>{{ i.DONOR_PREF_CLASS }} </td>
+                      <td>{{ i.UV_PHONE }}</td>
+<!--                      <td>{{ i.AF_ASSIGNED_USER }}</td>-->
+<!--                      <td><p ng-click="assign(i.PIDM_KEY, 'rl07bebb@siena.edu')" class="btn btn-warning mt-3">Assign To Me</p></td>-->
+                    </tr>
+                  </tbody>
+                  </table>
         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
     </div>
@@ -170,6 +141,9 @@
     <!-- Angular Imports --> 
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.min.js"></script>
+              
+    <script src="../../js/app.js"></script>
+    <script src="../../js/controllers/MainController.js"></script>  
   </div>
 </body>
 

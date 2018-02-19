@@ -44,6 +44,13 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
             });
     };
     
+    $scope.getUserProspects = function() {
+        $http.get("../../ajax/php/userProspects.php")
+            .then(function(response) {
+                  $scope.prospects = response.data;
+            });
+    };
+    
 
 //******************************************* THE FOLLOWING ARE EXAMPLES FROM LAB 8 FOR IN TEXT REFERENCE *******************************************
 
