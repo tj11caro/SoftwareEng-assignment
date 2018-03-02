@@ -12,6 +12,30 @@ module.exports = {
         // res.view("Gen/connect");
     },
 
+    getUserAccounts: function (req, res) {
+
+        User.find({}).exec(function (err, users) {
+            if (err) {
+                res.send(500, { error: 'Database Error ERR#0002' });
+            }
+            res.json({ users: users });
+        });
+    },
+
+    user: function (req, res) {
+
+        User.find({}).exec(function (err, users) {
+            if (err) {
+                res.send(500, { error: 'Database Error ERR#0002' });
+            }
+            res.json({ users: users });
+        });
+    },
+
+
+
+    //              Generic     Account       Creation         Of User            
+
     create: function (req, res, next) {
 
         //This is the method responsible for creating a new User
