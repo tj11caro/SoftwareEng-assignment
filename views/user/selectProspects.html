@@ -33,8 +33,11 @@
         <li class="breadcrumb-item">
           <a href="#">Dashboard</a>
         </li>
+          </ol>
+          <div class="col-lg-12">
+          <div class="card mb-3">
+            <div class="card-header">
         <li class="breadcrumb-item active">Select Prospects</li>
-      </ol>
          <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -67,21 +70,15 @@
                       <td>{{ i.AF_ASSIGNED_USER }}</td>
                       <td><p ng-click="assign(i.PIDM_KEY, 'rl07bebb@siena.edu')" class="btn btn-warning mt-3">Assign To Me</p></td>
                     </tr>
-                  </tbody>
+                  </tbody> 
                   </table>
         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
     </div>
     </div>
+          </div>
+         </div>
       <!-- Example DataTables Card-->
-      <div class="card mb-3">
-        <div class="card-header">
-        <div class="card-body">
-          
-        </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-      </div>
-    </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
