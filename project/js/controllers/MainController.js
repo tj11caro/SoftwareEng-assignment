@@ -1,4 +1,4 @@
-app.controller('MainController', ['$scope', '$http', function($scope, $http) {
+app.controller('MainController', ['$scope', '$http', '$window', function($scope, $http, $window) {
     
 //This function populates the userAccounts variable with all the user accounts in our current test Users table. 
     $scope.getUserAccounts = function() {
@@ -6,6 +6,12 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
             .then(function(response) {
                   $scope.userAccounts = response.data;
             });
+    };
+    
+    $scope.submitLogin = function() {
+        console.log($scope.email);
+        console.log($scope.pw);
+        $window.location.href = './index.html';
     };
     
 //This function currently takes in a pidm, and a username/email and writes the username/email to the pidm's prospect in the database. 
