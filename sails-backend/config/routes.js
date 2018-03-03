@@ -41,39 +41,6 @@ module.exports.routes = {
   //   }
   // },
 
-  'GET /admin/admin-users': {
-    controller: "AdminAPIController",
-    action: 'ListUsers',
-    skipAsset: true,
-    locals: {
-      layout: 'sb-admin-layout/admin/admin-layout.ejs'
-    }
-  },
-
-  'GET /admin/list': {
-    controller: "VolunteerAPIController",
-    action: 'list',
-    skipAsset: true,
-  },
-
-  'GET /admin/:page': {
-    controller: "AdminAPIController",
-    action: 'show',
-    skipAsset: true,
-    locals: {
-      layout: 'sb-admin-layout/admin/admin-layout'
-    }
-  },
-
-  'GET /volunteer/:page': {
-    controller: "VolunteerAPIController",
-    action: 'show',
-    skipAsset: true,
-    locals: {
-      layout: 'sb-admin-layout/volunteer/volunteer-layout.ejs'
-    }
-  },
-
   'GET /': {
     controller: "GenController",
     action: "connect",
