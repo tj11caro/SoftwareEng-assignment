@@ -1,12 +1,20 @@
-app.controller('LoginController', ['$scope', '$http', '$window', '$sanitize', function($scope, $http, $window, $sanitize) {
+app.controller('LoginController', ['$scope', '$http', '$window', function($scope, $http, $window) {
     
     
     $scope.submitLogin = function() {
         
-     $scope.email; 
-     $scope.pw;
-     $window.location.href = './index.html';
-        
+        alert("fired"); 
+
+         var user = {
+                    email: $scope.email,
+                    password: $scope.pw
+         };    
+
+         $http.get("http://oraserv.cs.siena.edu:1337/User/user")
+            .then(function (response) {
+                    console.log(response.data);
+                });
+
     };
     
 }]);
