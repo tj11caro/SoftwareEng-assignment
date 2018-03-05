@@ -37,8 +37,47 @@
           <div class="col-lg-12">
           <div class="card mb-3">
             <div class="card-header">
-        <li class="breadcrumb-item active">Select Prospects</li>
+        <li class="breadcrumb-item active">Advanced Search</li>
          <div class="card-body">
+             <form>
+          <div class="form-group">
+            <label for="Fname">First Name</label>
+            <input class="form-control" type="text" ng-model="query.Fname" name="First Name" placeholder="Enter First Name"/>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Last Name</label>
+            <input class="form-control" type="text" ng-model="query.Lname" name="Last Name" placeholder="Enter Last Name"/>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Maiden Name</label>
+            <input class="form-control" type="text" ng-model="query.Mname" name="Maiden Name" placeholder="Enter Maiden Name"/>
+          </div>
+         <div class="form-group">
+            <label for="exampleInputPassword1">Major</label>
+            <input class="form-control" type="text" ng-model="query.Major" name="Major" placeholder="Enter Major"/>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Graduation Year</label>
+            <input class="form-control" type="number" ng-model="query.Gradyear" name="Graduation Year" placeholder="Enter Graduation Year" min="1937"/>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Minor</label>
+            <input class="form-control" type="text" ng-model="query.Minor" name="Minor" placeholder="Enter Minor"/>
+          </div>
+         <div class="form-group">
+            <label for="exampleInputPassword1">Club</label>
+            <input class="form-control" type="text" ng-model="query.Club" name="Club" placeholder="Enter Club"/>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">City</label>
+            <input class="form-control" type="text" ng-model="query.City" name="City" placeholder="Enter City"/>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <p ng-click="buildQuery()" class="btn btn-warning mt-3">Search</p>
+            </div>
+          </div>
+        </form>
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>

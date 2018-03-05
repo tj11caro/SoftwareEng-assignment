@@ -7,18 +7,6 @@
 
 module.exports = {
 
-
-
-  /**
-   * `GenController.view()`
-   */
-  // show: function (req, res) {
-  //   var page = req.param('page');
-  //   // console.log(new Date());
-  //   // console.log(req.session.authenticated);
-  //   res.view('gen/pages/' + page);
-  // },
-
   connect: function (req, res) {
     console.log("req.session.authenticated", req.session.authenticated);
     if (req.session.authenticated) {
