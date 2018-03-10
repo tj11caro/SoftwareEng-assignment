@@ -1,4 +1,4 @@
-app.controller('MainController', ['$scope', '$http', function ($scope, $http) {
+angular.module("MainModule").controller('MainController', ['$scope', '$http', function ($scope, $http) {
 
     //This function populates the userAccounts variable with all the user accounts in our current test Users table. 
     $scope.getUserAccounts = function () {

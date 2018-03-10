@@ -32,24 +32,6 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  // 'GET /gen/:page': {
-  //   controller: "GenController",
-  //   action: 'show',
-  //   skipAsset: true,
-  //   locals: {
-  //     layout: 'gen/signin.ejs'
-  //   }
-  // },
-
-  'GET /': {
-    controller: "GenController",
-    action: "connect",
-    locals: {
-      layout: 'gen/signin.ejs'
-    }
-  },
-  // 'GET /index': { view: '/sb-admin/index.html' },
-  // 'GET /page': { view: 'sb-admin-layout/view-tester' },
 
   /***************************************************************************
   *                                                                          *
