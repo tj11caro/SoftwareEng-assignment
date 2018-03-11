@@ -50,6 +50,50 @@ app.controller('MainController', ['$scope', '$http', function ($scope, $http) {
                 $scope.prospects = response.data;
             });
     };
+    
+    $scope.buildQuery = function () {
+        var newQuery = "SELECT * FROM TESTTABLE1 where "; 
+        
+        var Fname = $scope.buildQuery.Fname;
+        var Lname = $scope.buildQuery.Lname;
+        var Mname = $scope.buildQuery.Mname;
+        var GradYear = $scope.buildQuery.GradYear;
+//        var Major = $scope.buildQuery.Major;
+//        var Minor = $scope.buildQuery.Minor;
+//        var Club = $scope.buildQuery.Club;
+        var City = $scope.buildQuery.City;
+        if (Fname != null){
+            newQuery+="Donor_First_Name = " + Fname + ", ";
+        }
+        if (Lname != null){
+            newQuery+="Donor_Last_Name = " + Lname + ", ";
+        }
+        if (Mname != null){
+            newQuery+="Donor_Maiden = " + Mname + ", ";
+        }
+//        if (Major != null){
+//            newQuery+="Donor_Major = " + Major + ", ";
+//        }
+        if (GradYear != null){
+            newQuery+="Donor_Pref_Class = " + GradYear + ", ";
+        }
+//        if (Minor != null){
+//            newQuery+="Donor_Minor = " + Minor + ", ";
+//        }
+//        if (Club != null){
+//            newQuery+="Donor_Club = " + Club + ", ";
+//        }
+        if (City != null){
+            newQuery+="UV_City = " + City + ", ";
+        }
+        $scope.advancedSearch = newQuery.substring(0, newQuery.length-2);
+        $scope.advancedSearch += ";";
+        alert($scope.advancedSearch);
+         $http.get("../../ajax/php/advancedSearch.php")
+            .then(function (response) {
+                $scope.prospects = response.data;
+            });
+    }
 
 
     //******************************************* THE FOLLOWING ARE EXAMPLES FROM LAB 8 FOR IN TEXT REFERENCE *******************************************
