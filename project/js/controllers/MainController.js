@@ -86,9 +86,13 @@ app.controller('MainController', ['$scope', '$http', function ($scope, $http) {
         if (City != null){
             newQuery+="UV_City = " + City + ", ";
         }
-        var str = newQuery.substring(0, newQuery.length-2)
-        str+= ";";
-        alert(str)
+        $scope.advancedSearch = newQuery.substring(0, newQuery.length-2);
+        $scope.advancedSearch += ";";
+        alert($scope.advancedSearch);
+         $http.get("../../ajax/php/advancedSearch.php")
+            .then(function (response) {
+                $scope.prospects = response.data;
+            });
     }
 
 
