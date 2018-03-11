@@ -65,6 +65,6 @@ module.exports = {
     });
   },
 
-  // connection: 'oraservdb'
+  connection: 'oraservdb'
 };
 

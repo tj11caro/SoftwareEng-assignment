@@ -6,27 +6,12 @@
  */
 
 module.exports = {
-    show: function (req, res) {
-        var page = req.param('page');
-        // if (page == null) {
-        //     page = "admin";
-        // }
-        AdminAPI.find({}).exec(function (err, admin) {
+    getUserAccounts: function (req, res) {
+        User.find({}).exec(function (err, users) {
             if (err) {
                 res.send(500, { error: 'Database Error ERR#0002' });
             }
-            res.view('sb-admin-layout/admin/' + page, { admin: admin });
-        });
-    },
-
-    ListUsers: function (req, res) {
-        console.log("In ListUsers");
-        TESTTABLE1.find({}).exec(function (err, volunteers) {
-            console.log("Volunteer =", volunteers);
-            if (err) {
-                res.send(500, { error: 'Database Error ERR#0002' });
-            }
-            res.view('sb-admin-layout/admin/admin-users', { volunteers: volunteers });
+            res.json({ users: users });
         });
     },
 

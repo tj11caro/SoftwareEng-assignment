@@ -8,10 +8,6 @@
 var newId;
 module.exports = {
 
-    show: function (req, res) {
-        // res.view("Gen/connect");
-    },
-
     getSession: function (req, res) {
         if (!req.session.User) {
             console.log(" req.session.User", req.session.User, " is not Defined")
@@ -25,31 +21,6 @@ module.exports = {
                 res.send(500, { error: 'Database Error ERR#0002' });
             }
             res.json({ users: users });
-        });
-    },
-
-    user: function (req, res) {
-        User.find({}).exec(function (err, users) {
-            if (err) {
-                res.send(500, { error: 'Database Error ERR#0002' });
-            }
-            res.json({ users: users });
-        });
-    },
-
-    find: function (req, res) {
-        return User.find().exec(function (err, user) {
-            //General Error Detection
-            if (err) { return next(err); }
-        });
-    },
-
-    list: function (req, res) {
-        User.find({}).exec(function (err, user) {
-            if (err) {
-                res.send(500, { error: 'Database Error ERR#0002' });
-            }
-            res.view('sb-admin-layout/pages/listUser', { user: user });
         });
     },
 

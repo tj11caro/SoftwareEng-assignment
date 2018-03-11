@@ -35,7 +35,7 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  UserController: {
+  UserAPIController: {
     'create': 'flash',
     'login': 'flash',
     // '*':'sessionAuth'
