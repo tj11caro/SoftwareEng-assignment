@@ -12,8 +12,14 @@ module.exports = {
         // res.view("Gen/connect");
     },
 
-    getUserAccounts: function (req, res) {
+    getSession: function (req, res) {
+        if (!req.session.User) {
+            console.log(" req.session.User", req.session.User, " is not Defined")
+        }
+        res.json({ user: req.session.User });
+    },
 
+    getUserAccounts: function (req, res) {
         User.find({}).exec(function (err, users) {
             if (err) {
                 res.send(500, { error: 'Database Error ERR#0002' });
@@ -23,7 +29,6 @@ module.exports = {
     },
 
     user: function (req, res) {
-
         User.find({}).exec(function (err, users) {
             if (err) {
                 res.send(500, { error: 'Database Error ERR#0002' });
@@ -32,7 +37,21 @@ module.exports = {
         });
     },
 
+    find: function (req, res) {
+        return User.find().exec(function (err, user) {
+            //General Error Detection
+            if (err) { return next(err); }
+        });
+    },
 
+    list: function (req, res) {
+        User.find({}).exec(function (err, user) {
+            if (err) {
+                res.send(500, { error: 'Database Error ERR#0002' });
+            }
+            res.view('sb-admin-layout/pages/listUser', { user: user });
+        });
+    },
 
     //              Generic     Account       Creation         Of User            
 
@@ -86,13 +105,6 @@ module.exports = {
         }
     },
 
-    find: function (req, res) {
-        return User.find().exec(function (err, user) {
-            //General Error Detection
-            if (err) { return next(err); }
-        });
-    },
-
     login: function (req, res, next) {
         console.log(req.params.all());
         if (!req.param('email') || !req.param('password')) {
@@ -138,15 +150,6 @@ module.exports = {
                 req.session.user = user;
                 res.redirect('/');
             });
-        });
-    },
-
-    list: function (req, res) {
-        User.find({}).exec(function (err, user) {
-            if (err) {
-                res.send(500, { error: 'Database Error ERR#0002' });
-            }
-            res.view('sb-admin-layout/pages/listUser', { user: user });
         });
     },
 };
