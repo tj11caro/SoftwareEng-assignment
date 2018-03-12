@@ -87,7 +87,7 @@ module.exports = {
                 return res.redirect('/project/login.html');
             }
 
-            var bcrypt = require('bcrypt');
+            var bcrypt = require('bcrypt-nodejs');
             console.log(user.ePassword);
             bcrypt.compare(password, user.ePassword, function (err, valid) {
                 //General Error Detection
