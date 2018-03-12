@@ -1,8 +1,16 @@
-angular.module("MainModule").controller('MainController', ['$scope', '$http', function ($scope, $http) {
+app.controller('MainController', ['$scope', '$http', '$location', 'user', function ($scope, $http, $location, user) {
 
+    $scope.auth = function() {
+	console.log(user); 
+        if(user.isUserLoggedIn() == false) {
+            alert("You need to login."); 
+            $location.path("/")
+        }
+    }
+    
     //This function populates the userAccounts variable with all the user accounts in our current test Users table. 
     $scope.getUserAccounts = function () {
-        $http.get("../../ajax/php/getUserAccounts.php")
+        $http.get("ajax/php/getUserAccounts.php")
             .then(function (response) {
                 $scope.userAccounts = response.data;
             });
@@ -12,7 +20,7 @@ angular.module("MainModule").controller('MainController', ['$scope', '$http', fu
     //It then refreshes prospects variable with the getProspects() function 
     $scope.postAssignUser = function (pidmParam, userParam) {
         $http.post(
-            "../../ajax/php/postAssignUser.php", {
+            "ajax/php/postAssignUser.php", {
                 'pidm': pidmParam,
                 'user': userParam
             }
@@ -23,7 +31,7 @@ angular.module("MainModule").controller('MainController', ['$scope', '$http', fu
 
     //This was the first function I wrote that interfaced with the database. It just grabs a title databas
     $scope.getTitle = function () {
-        $http.get("../../ajax/php/getTitle.php")
+        $http.get("ajax/php/getTitle.php")
             .then(function (response) {
                 $scope.title = response.data;
                 $scope.title = $scope.title[0].TestTextData;
@@ -31,21 +39,21 @@ angular.module("MainModule").controller('MainController', ['$scope', '$http', fu
     };
 
     $scope.getUsers = function () {
-        $http.get("../../ajax/php/getUsers.php")
+        $http.get("ajax/php/getUsers.php")
             .then(function (response) {
                 $scope.users = response.data;
             });
     };
 
     $scope.getProspects = function () {
-        $http.get("../../ajax/php/getProspects.php")
+        $http.get("ajax/php/getProspects.php")
             .then(function (response) {
                 $scope.prospects = response.data;
             });
     };
 
     $scope.getUserProspects = function () {
-        $http.get("../../ajax/php/getUserProspects.php")
+        $http.get("ajax/php/getUserProspects.php")
             .then(function (response) {
                 $scope.prospects = response.data;
             });
