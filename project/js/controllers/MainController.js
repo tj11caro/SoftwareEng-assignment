@@ -63,7 +63,7 @@ app.controller('MainController', ['$scope', '$http', function ($scope, $http) {
 //        var Club = $scope.buildQuery.Club;
         var City = $scope.buildQuery.City;
         if (Fname != null){
-            newQuery+="Donor_First_Name = " + Fname + ", ";
+            newQuery+="DONOR_FIRST_NAME = '" + Fname + "', ";
         }
         if (Lname != null){
             newQuery+="Donor_Last_Name = " + Lname + ", ";
@@ -88,11 +88,14 @@ app.controller('MainController', ['$scope', '$http', function ($scope, $http) {
         }
         $scope.advancedSearch = newQuery.substring(0, newQuery.length-2);
         $scope.advancedSearch += ";";
-        alert($scope.advancedSearch);
-         $http.get("../../ajax/php/advancedSearch.php")
-            .then(function (response) {
-                $scope.prospects = response.data;
-            });
+ //       alert($scope.advancedSearch);
+         $http.post("../../ajax/php/advancedSearch.php",{
+//             'query':$scope.advancedSearch
+             'Fname':Fname
+         }).then(function (response) {
+               $scope.prospects = response.data;
+                console.log(response);
+         });
     }
 
 
