@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-  scheme: true,
+  // scheme: true,
   autoPK: false,
   autoCreatedAt: false,
   autoUpdatedAt: false,

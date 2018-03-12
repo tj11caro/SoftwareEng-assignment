@@ -16,10 +16,21 @@ module.exports = {
     },
 
     getProspects: function (req, res) {
-        TESTTABLE1.find({}).exec(function (err, result) {
-            res.json({ result: result });
+        DonorData.find({}).exec(function (err, result) {
+            res.json(result);
         });
     },
+
+    submitImport: function (req, res) {
+        // console.log(req.param('excelData'));
+        var sample = req.param('excelData');
+        DonorData.create(sample).exec(function (err, result) {
+            if (err) {
+                sails.log.error(err);
+            }
+            sails.log(result);
+        });
+    }
 
 };
 

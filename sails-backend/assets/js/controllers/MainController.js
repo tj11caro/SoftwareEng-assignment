@@ -4,7 +4,8 @@ app.controller('MainController', ['$scope', '$http', function ($scope, $http) {
     $scope.getUserAccounts = function () {
         $http.get("/UserAPI/getUserAccounts")
             .then(function (response) {
-                $scope.userAccounts = response.data.users;
+                console.log(response.data);
+                $scope.userAccounts = response.data;
             });
     };
 
@@ -30,16 +31,13 @@ app.controller('MainController', ['$scope', '$http', function ($scope, $http) {
     };
 
     $scope.getProspects = function () {
-        $http.get("/UserAPI/getProspects")
+        console.log("Whart");
+        $http.get("/AdminAPI/getProspects")
             .then(function (response) {
-                // console.log(response);
+                console.log(response);
                 $scope.prospects = response.data;
             });
     };
-
-    $scope.importExcel = function () {
-
-    }
 
 }]);
 

@@ -24,7 +24,7 @@ module.exports = {
     },
 
     getProspects: function (req, res) {
-        TESTTABLE1.find({}).exec(function (err, result) {
+        DonorData.find({}).exec(function (err, result) {
             res.json(result);
         });
     },
