@@ -37,5 +37,9 @@ app.controller('MainController', ['$scope', '$http', function ($scope, $http) {
             });
     };
 
+    $scope.importExcel = function () {
+
+    }
+
 }]);
 
