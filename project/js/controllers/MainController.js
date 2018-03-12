@@ -92,6 +92,7 @@ app.controller('MainController', ['$scope', '$http', function ($scope, $http) {
          $http.post("../../ajax/php/advancedSearch.php",{
 //             'query':$scope.advancedSearch
              'Fname':Fname
+             'Lname':Lname
          }).then(function (response) {
                $scope.prospects = response.data;
                 console.log(response);
