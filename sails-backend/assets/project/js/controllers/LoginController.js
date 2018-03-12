@@ -12,7 +12,7 @@ app.controller('LoginController', ['$scope', '$http', '$window', function ($scop
             method: 'GET',
             url: '/User/getMe'
         }).then(function (response) {
-            console.log(response.data);
+            // console.log(response.data);
         });
     };
 

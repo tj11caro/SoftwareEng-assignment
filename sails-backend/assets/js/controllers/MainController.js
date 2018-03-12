@@ -1,20 +1,18 @@
-angular.module('MainModule').controller('MainController', ['$scope', '$http', function ($scope, $http) {
+app.controller('MainController', ['$scope', '$http', function ($scope, $http) {
 
     //This function populates the userAccounts variable with all the user accounts in our current test Users table. 
     $scope.getUserAccounts = function () {
-        $http.get("/admin/list")
+        $http.get("/UserAPI/getUserAccounts")
             .then(function (response) {
-                // console.log(response);
-                // console.log(response.data.data);
-                $scope.userAccounts = response.data.data;
+                $scope.userAccounts = response.data.users;
             });
     };
 
     //This function currently takes in a pidm, and a username/email and writes the username/email to the pidm's prospect in the database. 
     //It then refreshes prospects variable with the getProspects() function 
-    $scope.assign = function (pidmParam, userParam) {
+    $scope.postAssignUser = function (pidmParam, userParam) {
         $http.post(
-            "../js/ajax/php/assignUser.php", {
+            "/VounteerAPI/postAssignUser", {
                 'pidm': pidmParam,
                 'user': userParam
             }
@@ -23,46 +21,20 @@ angular.module('MainModule').controller('MainController', ['$scope', '$http', fu
         });
     };
 
-    //This was the first function I wrote that interfaced with the database. It just grabs a title databas
-    $scope.getTitle = function () {
-        $http.get("../js/ajax/php/getTitle.php")
-            .then(function (response) {
-                $scope.title = response.data;
-                $scope.title = $scope.title[0].TestTextData;
-            });
-    };
-
-    $scope.getUsers = function () {
-        $http({
-
-            method: 'GET',
-            url: ''
-
-        }).then(function (response) {
-            console.log(response);
-            // on success
-            $scope.users = response.data;
-
-        }, function (response) {
-            console.log(response);
-            // on error
-            console.log(response.data, response.status);
-
-        });
-    };
-
-    $scope.getProspects = function () {
-        $http.get("/admin/list")
+    $scope.getUserProspects = function () {
+        $http.get("/VolunteerAPI/getUserProspects")
             .then(function (response) {
                 // console.log(response);
                 $scope.prospects = response.data;
             });
     };
 
-
-    //I Don't Think This Should Be getting used since we are using single pages
-    $scope.setPage = function (page) {
-        $scope.activePage = "../templates/p/admin/" + page;
+    $scope.getProspects = function () {
+        $http.get("/UserAPI/getProspects")
+            .then(function (response) {
+                // console.log(response);
+                $scope.prospects = response.data;
+            });
     };
 
 }]);

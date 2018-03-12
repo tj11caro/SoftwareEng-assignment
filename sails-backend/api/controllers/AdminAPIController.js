@@ -15,5 +15,11 @@ module.exports = {
         });
     },
 
+    getProspects: function (req, res) {
+        TESTTABLE1.find({}).exec(function (err, result) {
+            res.json({ result: result });
+        });
+    },
+
 };
 

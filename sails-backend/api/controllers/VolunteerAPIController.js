@@ -26,11 +26,5 @@ module.exports = {
             res.json({ result: result });
         });
     },
-
-    getProspects: function (req, res) {
-        TESTTABLE1.find({}).exec(function (err, result) {
-            res.json({ result: result });
-        });
-    },
 };
 

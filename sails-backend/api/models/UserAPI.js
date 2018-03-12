@@ -35,10 +35,10 @@ module.exports = {
       required: true,
       size: 45
     },
-    password: {
+    ePassword: {
       type: 'string',
       required: true,
-      size: 35
+      size: 70
     },
     phone: {
       type: 'string',
@@ -58,13 +58,15 @@ module.exports = {
   },
 
   beforeCreate: function (values, next) {
-    if (!values.password || values.password != values.confirmation) {
-      return next({ err: ["Password doesn't match password Confirmation ERR#0006"] });
+
+    //This commented-out code should be used for changing passwords
+    if (!values.ePassword) {
+      return next({ err: ["Password doesn't match doesn't Exist ERR#0006"] });
     }
 
-    require('bcrypt').hash(values.password, 10, function passwordEncrypter(err, password) {
+    require('bcrypt').hash(values.ePassword, 10, function passwordEncrypter(err, ePassword) {
       if (err) { return next(err); }
-      values.password = password;
+      values.ePassword = ePassword;
       values.online = true;
       next();
     });
@@ -72,4 +74,3 @@ module.exports = {
 
   connection: 'oraservdb'
 };
-
