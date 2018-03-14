@@ -2,7 +2,7 @@ app.controller('LoginController', ['$scope', '$http', '$window', function ($scop
 
     $scope.submitLogin = function () {
         $http.post(
-            '/UserAPI/login', {
+            'htpp://oraserv.cs.siena.edu:2000/UserAPI/login', {
                 'email': $scope.email,
                 'password': $scope.password,
             }).then(function (response) {
@@ -25,7 +25,7 @@ app.controller('LoginController', ['$scope', '$http', '$window', function ($scop
 
     $scope.submitSignUp = function () {
         $http.post(
-            "/UserAPI/signup", {
+            "htpp://oraserv.cs.siena.edu:2000/UserAPI/signup", {
                 'vpassword': $scope.volunteer.password,
                 'vemail': $scope.volunteer.email,
                 'vpidm': $scope.volunteer.pidm,
@@ -43,7 +43,7 @@ app.controller('LoginController', ['$scope', '$http', '$window', function ($scop
 
     $scope.submitNewAdmin = function () {
         $http.post(
-            "/UserAPI/createAdmin", {
+            "htpp://oraserv.cs.siena.edu:2000/UserAPI/createAdmin", {
                 'email': $scope.admin.email,
                 'pidm': $scope.admin.pidm,
                 'password': $scope.admin.password,
