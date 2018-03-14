@@ -1,5 +1,5 @@
 /**
- * AdminAPI.js
+ * UserAPI.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
@@ -13,51 +13,58 @@ module.exports = {
     pidm: {
       type: 'string',
       primaryKey: true,
-      // required: true,
+      required: true,
       size: 15
+    },
+    userType: {
+      type: 'string',
+      required: true,
+      enum: ['admin', 'volunteer', 'developer']
     },
     fname: {
       type: 'string',
-      required: true,
       size: 20
     },
     lname: {
       type: 'string',
-      required: true,
       size: 25
     },
     email: {
       type: 'string',
       email: true,
       required: true,
-      // unique:true,
       size: 45
     },
-    // profile:{
-    //   type:'string'
-    // },
     ePassword: {
       type: 'string',
       required: true,
+      size: 70
     },
     phone: {
       type: 'string',
-      required: true,
+      // required: true,
       size: 15
     },
   },
+
   toJSON: function () {
     var obj = this.toObject();
-    delete jstring.ePassword;
+    // var jstring=json(obj);
+    // delete jstring.password;
+    // delete obj.confirmation;
+    // delete obj.encryptedPassword;
+    // delete obj._csrf;
     return obj;
   },
 
   beforeCreate: function (values, next) {
-    if (!values.password || values.password != values.confirmation) {
-      return next({ err: ["Password doesn't match password Confirmation ERR#0006"] });
+
+    //This commented-out code should be used for changing passwords
+    if (!values.ePassword) {
+      return next({ err: ["Password doesn't match doesn't Exist ERR#0006"] });
     }
 
-    require('bcrypt').hash(values.password, 10, function passwordEncrypter(err, ePassword) {
+    require('bcrypt-nodejs').hash(values.ePassword, 10, function passwordEncrypter(err, ePassword) {
       if (err) { return next(err); }
       values.ePassword = ePassword;
       values.online = true;
@@ -67,4 +74,3 @@ module.exports = {
 
   connection: 'oraservdb'
 };
-

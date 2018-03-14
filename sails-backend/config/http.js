@@ -30,24 +30,24 @@ module.exports.http = {
     *                                                                          *
     ***************************************************************************/
 
-    order: [
-      'startRequestTimer',
-      'cookieParser',
-      'session',
-      'myRequestLogger',
-      'accessControlHeader',
-      // 'bodyParser',
-      'handleBodyParserError',
-      'compress',
-      'methodOverride',
-      'poweredBy',
-      '$custom',
-      'router',
-      'www',
-      'favicon',
-      '404',
-      '500'
-    ],
+    // order: [
+    //   'startRequestTimer',
+    //   'cookieParser',
+    //   'session',
+    //   // 'myRequestLogger',
+    //   'accessControlHeader',
+    //   // 'bodyParser',
+    //   'handleBodyParserError',
+    //   'compress',
+    //   'methodOverride',
+    //   'poweredBy',
+    //   '$custom',
+    //   'router',
+    //   'www',
+    //   'favicon',
+    //   '404',
+    //   '500'
+    // ],
 
     /****************************************************************************
     *                                                                           *
@@ -55,25 +55,25 @@ module.exports.http = {
     *                                                                           *
     ****************************************************************************/
 
-    myRequestLogger: function (req, res, next) {
-      console.log("Requested :: ", req.method, req.url);
-      return next();
-    },
+    // myRequestLogger: function (req, res, next) {
+    //   console.log("Requested :: ", req.method, req.url);
+    //   return next();
+    // },
 
-    accessControlHeader: function (req, res, next) {
-      res.setHeader('Access-Control-Allow-Origin', 'http://oraserv.cs.siena.edu');
+    // accessControlHeader: function (req, res, next) {
+    //   res.setHeader('Access-Control-Allow-Origin', 'http://oraserv.cs.siena.edu');
 
-      // Request methods you wish to allow
-      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    //   // Request methods you wish to allow
+    //   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
-      // Request headers you wish to allow
-      res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    //   // Request headers you wish to allow
+    //   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
-      // Set to true if you need the website to include cookies in the requests sent
-      // to the API (e.g. in case you use sessions)
-      res.setHeader('Access-Control-Allow-Credentials', true);
-      next();
-    },
+    //   // Set to true if you need the website to include cookies in the requests sent
+    //   // to the API (e.g. in case you use sessions)
+    //   res.setHeader('Access-Control-Allow-Credentials', true);
+    //   next();
+    // },
 
 
     /***************************************************************************

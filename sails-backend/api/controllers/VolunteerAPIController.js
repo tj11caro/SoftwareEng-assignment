@@ -7,20 +7,23 @@
 
 module.exports = {
 
-    show: function (req, res) {
-        var page = req.param('page');
-        // console.log(new Date());
-        // console.log(req.session.authenticated);
-        res.view('sb-admin-layout/volunteer/' + page);
+    postAssignUser: function (req, res) {
+        var pidm = req.param("pidm");
+        var user = req.param("user");
+        TESTTABLE1.update({ "PIDM_KEY": pidm },
+            { "AF_ASSIGNED_USER": user }).exec(function (err, results) {
+                console.log("Inside Update Lets see whats up", results);
+                res.json({ results: result });
+            });
     },
 
-    list: function (req, res) {
-        AdminAPI.find().exec(function (err, jsonlist) {
-            if (err) {
-                res.send(500, { error: 'Database Error' });
-            }
-            console.log(jsonlist);
-            return res.json({ data: jsonlist });
+    getUserProspects: function (req, res) {
+        var userEmail = req.param("userEmail");
+        if (userEmail === undefined || userEmail === "") {
+            userEmail == "tj11caro@siena.edu"
+        }
+        TESTTABLE1.find({ "AF_ASSIGNED_USER": userEmail }).exec(function (err, result) {
+            res.json({ result: result });
         });
     },
 };
