@@ -9,7 +9,7 @@ app.controller('SessionController', ['$scope', '$http', '$window', function ($sc
             $http({
 
                 method: 'GET',
-                url: '/UserAPI/getSession'
+                url: 'htpp://oraserv.cs.siena.edu:2000/UserAPI/getSession'
 
             }).then(function (response) {
                 // on success
