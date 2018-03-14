@@ -8,7 +8,14 @@ $info = json_decode(file_get_contents("php://input"));
 if (count($info) > 0) {    
 //    $query     = mysqli_real_escape_string($mysqli, $info->query);
     $Fname     = mysqli_real_escape_string($mysqli, $info->Fname);
-    $query     = "Select * from TESTTABLE1 where DONOR_FIRST_NAME = '$Fname'"; 
+    $Lname     = mysqli_real_escape_string($mysqli, $info->Lname);
+    $Mname     = mysqli_real_escape_string($mysqli, $info->Mname);
+    $GradYear     = mysqli_real_escape_string($mysqli, $info->GradYear);
+  //  $Minor     = mysqli_real_escape_string($mysqli, $info->Minor);
+  //  $Major     = mysqli_real_escape_string($mysqli, $info->Major);
+  //  $Club     = mysqli_real_escape_string($mysqli, $info->Club);
+    $City     = mysqli_real_escape_string($mysqli, $info->City);
+    $query     = newQuery;
     $rows=array();
     
     $result=mysqli_query($mysqli, $query);
