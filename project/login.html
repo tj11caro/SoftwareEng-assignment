@@ -18,42 +18,43 @@
   <link href="css/login.css" rel="stylesheet">
 </head>
 
-  <body ng-controller="LoginController" ng-app="AnnualFund" style="background: #00594d">
-    <form class="form-signin" style="background: #e6e7e8" ng-submit="submitLogin()">
-      <div class="text-center mb-4">
-        <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Siena College Annual Fund</h1>
-        <p>The education of a lifetime.</p>
-      </div>
+<body ng-controller="LoginController" ng-app="AnnualFund" style="background: #00594d">
+  <form class="form-signin rounded" style="background: #e6e7e8 " ng-submit="submitLogin()">
+    <div class="text-center mb-4">
+      <!-- <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
+      <h1 class="h3 mb-3 font-weight-normal">Siena College Annual Fund</h1>
+      <p>The education of a lifetime.</p>
+    </div>
 
-      <div class="form-label-group">
-        <input ng-model="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputEmail">Email address</label>
-      </div>
+    <div class="form-label-group">
+      <input ng-model="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+      <label for="inputEmail">Email address</label>
+    </div>
 
-      <div class="form-label-group">
-        <input ng-model="pw" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <label for="inputPassword">Password</label>
-      </div>
+    <div class="form-label-group">
+      <input ng-model="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+      <label for="inputPassword">Password</label>
+    </div>
 
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
-    </form>
-    
-    <!-- Angular Imports --> 
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.min.js"></script>
-    
-    <!-- Modules -->
-    <script src="js/app.js"></script>
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
+  </form>
 
-    <!-- Controllers -->
-    <script src="js/controllers/LoginController.js"></script>
-    
-  </body>
+  <!-- Angular Imports -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.min.js"></script>
+
+  <!-- Modules -->
+  <script src="/js/app.js"></script>
+
+  <!-- Controllers -->
+  <script src="/js/controllers/LoginController.js"></script>
+
+</body>
+
 </html>

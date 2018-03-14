@@ -1,9 +1,0 @@
-{
-    "Session": {
-        "user": "json // references the Server User",
-        "login": {
-            "email": "email // ",
-            "password": "password // "
-        }
-    }
-}

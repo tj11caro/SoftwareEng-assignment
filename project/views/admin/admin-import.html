@@ -7,91 +7,148 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+
   <title>Siena College Annual Fund</title>
   <!-- Bootstrap core CSS-->
   <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
-  <link href="../../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet"
-        type="text/css">
+  <link href="../../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <!-- Page level plugin CSS-->
   <link href="../../vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="../../css/sb-admin.css" rel="stylesheet">
   <link href="../../css/laf.css" rel="stylesheet">
+
+  <!-- XLSX Scripts -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-touch.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-animate.js"></script>
+  <!-- ui-grid -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-grid/4.0.0/ui-grid.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-grid/4.0.0/ui-grid.css" />
+  <!-- FileSaver shim for exporting files -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+  <!-- SheetJS js-xlsx library -->
+  <script src="/js/xlsx.full.min.js"></script>
+  <!-- SheetJS Service -->
+  <script src="/js/SheetJS-angular.js"></script>
+
+  <!-- /XLSX Scripts -->
+
+  <style>
+    .grid1 {
+      width: 500px;
+      height: 400px;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .custom-file-upload {
+      border: 1px solid #ccc;
+      display: inline-block;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+
+    ;
+  </style>
 </head>
 
-<body ng-app="" class="fixed-nav sticky-footer bg-dark" id="page-top">
+<!--  ng-app="AnnualFund" ng-controller="SessionController" ng-init="getSession()" -->
 
+<body ng-app="AnnualFund" ng-controller="XlsxController" class="fixed-nav sticky-footer bg-dark" id="page-top">
+  <!-- ng-app="AnnualFundImport," ng-controller="XlsxController" -->
+  <!-- <div ng-app="AnnualFund, AnnualFundImport"> -->
+  <p ng-hide="true" ng-controller="SessionController" ng-init="getSession()"></p>
+  <!-- </div> -->
 
-<div ng-include="'admin-nav.html'"></div>
+  <div ng-include=" 'admin-nav.html' "></div>
 
-  <div class="content-wrapper">
-    <div class="container-fluid">
+  <div class="content-wrapper " ng-controller="XlsxController">
+    <div class="container-fluid ">
       <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="#">Dashboard</a>
+      <ol class="breadcrumb ">
+        <li class="breadcrumb-item ">
+          <a href="# ">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">My Dashboard</li>
+        <li class="breadcrumb-item active ">My Dashboard</li>
       </ol>
+    </div>
 
-    </div>
-    
-    <div class="m-3">
-        <h2>Update Database With Banner File</h2>
-        <a href="#" class="btn btn-danger mt-3"><i class="fa fa-fw fa-database"></i> Import</a>
-    </div>
-    
     <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Your Website 2017</small>
-        </div>
+    <div class="m-3 panel panel-default ">
+      <h2>Update Database With Banner File</h2>
+      <span>
+        <label class="btn btn-danger mt-3 ">
+          <input type="file" import-sheet-js=" " opts="gridOptions " multiple="false " onchange="angular.element(this).scope().setFile(this) ">
+          <i class="fa fa-fw fa-cloud "></i> Import
+        </label>
+        <label ng-class="{disabled: !canSubmit} " ng-click="submitImport()" class=" btn btn-success mt-3 ">
+          <i class="fa fa-fw fa-database " ng-click="submitImport() "></i> Submit
+        </label>
+        <p class="h3 px-5 text-right ">{{gridOptions.filename}}</p>
+      </span>
+      <div id="grid1 " ui-grid="gridOptions " ui-grid-selection ui-grid-exporter class="grid "></div>
+    </div>
+  </div>
+  <!-- /.content-wrapper-->
+  <footer class="sticky-footer ">
+    <div class="container ">
+      <div class="text-center ">
+        <small>Copyright © Your Website 2017</small>
       </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
-          </div>
+    </div>
+  </footer>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded " href="#page-top ">
+    <i class="fa fa-angle-up "></i>
+  </a>
+  <!-- Logout Modal-->
+  <div class="modal fade " id="exampleModal " tabindex="-1 " role="dialog " aria-labelledby="exampleModalLabel
+          " aria-hidden="true ">
+    <div class="modal-dialog " role="document ">
+      <div class="modal-content ">
+        <div class="modal-header ">
+          <h5 class="modal-title " id="exampleModalLabel ">Ready to Leave?</h5>
+          <button class="close " type="button " data-dismiss="modal " aria-label="Close ">
+            <span aria-hidden="true ">×</span>
+          </button>
+        </div>
+        <div class="modal-body ">Select "Logout " below if you are ready to end your current session.</div>
+        <div class="modal-footer ">
+          <button class="btn btn-secondary " type="button " data-dismiss="modal ">Cancel</button>
+          <a class="btn btn-primary " href="login.html ">Logout</a>
         </div>
       </div>
     </div>
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
-    <!-- Custom scripts for this page-->
-    <script src="js/sb-admin-datatables.min.js"></script>
-    <script src="js/sb-admin-charts.min.js"></script>
-    
-    <!-- Angular Imports --> 
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.min.js"></script>
   </div>
+
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="../../vendor/jquery/jquery.min.js "></script>
+  <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js "></script>
+  <!-- Core plugin JavaScript-->
+  <script src="../../vendor/jquery-easing/jquery.easing.min.js "></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="../../vendor/chart.js/Chart.min.js "></script>
+  <script src="../../vendor/datatables/jquery.dataTables.js "></script>
+  <script src="../../vendor/datatables/dataTables.bootstrap4.js "></script>
+  <!-- Custom scripts for all pages-->
+  <script src="../../js/sb-admin.min.js "></script>
+  <!-- Custom scripts for this page-->
+  <script src="../../js/sb-admin-datatables.min.js "></script>
+  <!-- <script src="../../js/xlsx/app.js "></script> -->
+
+
+  <!-- Modules -->
+  <script src="/js/xlapp.js "></script>
+
+  <!-- Controllers -->
+  <script src="/js/controllers/XlsxController.js "></script>
+  <script src="/js/controllers/SessionController.js "></script>
 </body>
 
 </html>
