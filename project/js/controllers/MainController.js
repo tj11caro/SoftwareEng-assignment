@@ -10,7 +10,7 @@ app.controller('MainController', ['$scope', '$http', function ($scope, $http) {
 
     //This function currently takes in a pidm, and a username/email and writes the username/email to the pidm's prospect in the database. 
     //It then refreshes prospects variable with the getProspects() function 
-    $scope.assign = function (pidmParam, userParam) {
+    $scope.postAssignUser = function (pidmParam, userParam) {
         $http.post(
             "../../ajax/php/postAssignUser.php", {
                 'pidm': pidmParam,
