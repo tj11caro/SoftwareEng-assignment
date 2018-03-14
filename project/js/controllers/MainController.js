@@ -12,7 +12,7 @@ app.controller('MainController', ['$scope', '$http', function ($scope, $http) {
     //It then refreshes prospects variable with the getProspects() function 
     $scope.assign = function (pidmParam, userParam) {
         $http.post(
-            "../../ajax/php/assignUser.php", {
+            "../../ajax/php/postAssignUser.php", {
                 'pidm': pidmParam,
                 'user': userParam
             }
