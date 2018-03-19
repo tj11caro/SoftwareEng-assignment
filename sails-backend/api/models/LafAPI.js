@@ -9,6 +9,9 @@ module.exports = {
 
   attributes: {
 
+    PIDM_KEY: { type: 'integer', size: 11, required: true, primaryKey: true, },
+    ASK_AMOUNT: { type: 'double', size: 11 },
+
   }
 };
 
