@@ -43,6 +43,13 @@ app.controller('MainController', ['$scope', '$http', function ($scope, $http) {
                 $scope.prospects = response.data;
             });
     };
+    
+    $scope.getUserProspects = function () {
+        $http.get("../../ajax/php/getUserProspects.php")
+            .then(function (response) {
+                $scope.prospects = response.data;
+            });
+    };
 
     $scope.buildQuery = function () {
         var newQuery = "SELECT * FROM TESTTABLE1 where ";
