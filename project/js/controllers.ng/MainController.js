@@ -2,7 +2,7 @@ app.controller('MainController', ['$scope', '$http', function ($scope, $http) {
 
     //This function populates the userAccounts variable with all the user accounts in our current test Users table. 
     $scope.getUserAccounts = function () {
-        $http.get("htpp://oraserv.cs.siena.edu:2000/UserAPI/getUserAccounts")
+        $http.get("http://oraserv.cs.siena.edu:2000/UserAPI/getUserAccounts")
             .then(function (response) {
                 console.log(response.data);
                 $scope.userAccounts = response.data;
@@ -13,7 +13,7 @@ app.controller('MainController', ['$scope', '$http', function ($scope, $http) {
     //It then refreshes prospects variable with the getProspects() function 
     $scope.postAssignUser = function (pidmParam, userParam) {
         $http.post(
-            "htpp://oraserv.cs.siena.edu:2000/VounteerAPI/postAssignUser", {
+            "http://oraserv.cs.siena.edu:2000/VounteerAPI/postAssignUser", {
                 'pidm': pidmParam,
                 'user': userParam
             }
@@ -23,7 +23,7 @@ app.controller('MainController', ['$scope', '$http', function ($scope, $http) {
     };
 
     $scope.getUserProspects = function () {
-        $http.get("htpp://oraserv.cs.siena.edu:2000/VolunteerAPI/getUserProspects")
+        $http.get("http://oraserv.cs.siena.edu:2000/VolunteerAPI/getUserProspects")
             .then(function (response) {
                 // console.log(response);
                 $scope.prospects = response.data;
@@ -32,7 +32,7 @@ app.controller('MainController', ['$scope', '$http', function ($scope, $http) {
 
     $scope.getProspects = function () {
         console.log("Whart");
-        $http.get("htpp://oraserv.cs.siena.edu:2000/AdminAPI/getProspects")
+        $http.get("http://oraserv.cs.siena.edu:2000/AdminAPI/getProspects")
             .then(function (response) {
                 console.log(response);
                 $scope.prospects = response.data;
