@@ -26,5 +26,16 @@ module.exports = {
             res.json({ result: result });
         });
     },
+
+    buildQuery: function (req, res) {
+        //Sanitation
+        var query = req.param("newQuery");
+        TESTTABLE1.query(query, function (err, rawResult) {
+            if (err) {
+
+            }
+            res.json(rawResult);
+        });
+    }
 };
 
