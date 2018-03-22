@@ -1,9 +1,8 @@
-app.controller('LoginController', ['$scope', '$http', '$window', function ($scope, $http, $window) {
+app.controller('LoginController', ['$scope', '$http', '$window', '$env', function ($scope, $http, $window, $env) {
 
     $scope.submitLogin = function () {
-        console.log("Look at this -> ", app.globalVars);
         $http.post(
-            'http://oraserv.cs.siena.edu:2000/UserAPI/login', {
+            $env.apiRoot + 'UserAPI/login', {
                 'email': $scope.email,
                 'password': $scope.password,
             }).then(function (response) {
@@ -12,13 +11,13 @@ app.controller('LoginController', ['$scope', '$http', '$window', function ($scop
                 $scope.session.user = response.data;
                 console.log(response.data);
                 if ($scope.session.user.userType === "admin") {
-                    $window.location.href = '/project/views/admin/admin.html';
+                    $window.location.href = $env.projectRoot + 'views/admin/admin.html';
                 } else if ($scope.session.user.userType === "volunteer") {
-                    $window.location.href = '/project/views/user/user.html';
+                    $window.location.href = $env.projectRoot + 'views/user/user.html';
                 }
             }, function (response) {
                 // on error
-                // $window.location.href = '/project/login.html';
+                $window.location.href = $env.projectRoot + 'login.html';
                 console.log("Redirect May Not implemented ERR#0403");
                 console.log("Error in Login Controller #0001", response.data, response.status);
             });
@@ -26,17 +25,17 @@ app.controller('LoginController', ['$scope', '$http', '$window', function ($scop
 
     $scope.submitSignUp = function () {
         $http.post(
-            "http://oraserv.cs.siena.edu:2000/UserAPI/signup", {
+            $env.apiRoot + "UserAPI/signup", {
                 'vpassword': $scope.volunteer.password,
                 'vemail': $scope.volunteer.email,
                 'vpidm': $scope.volunteer.pidm,
             }
         ).then(function (response) {
             // on success
-            $window.location.href = '/project/views/admin/admin.html';
+            $window.location.href = $env.projectRoot + 'login.html';
         }, function (response) {
-            // on error
-            $window.location.href = '/project/signup.html';
+            // on error                
+            $window.location.href = $env.projectRoot + 'login.html';
             console.log("Redirect May Not implemented ERR#0403");
             console.log("Error in Login Controller #0002", response.data, response.status);
         });

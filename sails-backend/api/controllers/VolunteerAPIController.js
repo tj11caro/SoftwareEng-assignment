@@ -82,11 +82,21 @@ module.exports = {
 
     buildQuery: function (req, res) {
         //Sanitation
-        var query = req.param("newQuery");
-        TESTTABLE1.query(query, function (err, rawResult) {
+        var array = [];
+        req.param("Fname") ? array.push(req.param("Fname")) : "";
+        req.param("Lname") ? array.push(req.param("Lname")) : "";
+        req.param("Mname") ? array.push(req.param("Mname")) : "";
+        req.param("GradYear") ? array.push(req.param("GradYear")) : "";
+        req.param("City") ? array.push(req.param("City")) : "";
+        req.param("Major") ? array.push(req.param("Major")) : "";
+        req.param("Minor") ? array.push(req.param("Minor")) : "";
+        req.param("Club") ? array.push(req.param("Club")) : "";
+
+        DonorData.find({ tags: array }).exec(function (err, rawResult) {
             if (err) {
 
             }
+            console.log(rawResult);
             res.json(rawResult);
         });
     }
