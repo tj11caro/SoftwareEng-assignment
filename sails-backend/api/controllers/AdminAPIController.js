@@ -15,14 +15,23 @@ module.exports = {
         });
     },
 
-    getProspects: function (req, res) {
+    getAllProspects: function (req, res) {
         DonorData.find({}).exec(function (err, result) {
             res.json(result);
         });
     },
 
     submitImport: function (req, res) {
-        // console.log(req.param('excelData'));
+        var sample = req.param('excelData');
+        DonorData.findOrCreate(sample).exec(function (err, result) {
+            if (err) {
+                sails.log.error(err);
+            }
+            sails.log(result);
+        });
+    },
+
+    getExport: function (req, res) {
         var sample = req.param('excelData');
         DonorData.create(sample).exec(function (err, result) {
             if (err) {

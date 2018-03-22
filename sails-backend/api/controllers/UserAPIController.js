@@ -24,8 +24,10 @@ module.exports = {
     },
 
     getProspects: function (req, res) {
-        DonorData.find({}).exec(function (err, result) {
-            res.json(result);
+                DonorData.find({}).populate('lafapi').where({"AF_ASSIGNED_USER":null}).exec(function (err, result) {
+                    
+                    console.log(result);
+                    res.json(result);
         });
     },
 
