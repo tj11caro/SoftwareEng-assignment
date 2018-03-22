@@ -40,7 +40,7 @@ app.controller('XlsxController', ['$scope', '$http', 'SheetJSExportService', fun
     $scope.submitImport = function () {
         console.log($scope.gridOptions.data);
         $http.post(
-            "htpp://oraserv.cs.siena.edu:2000/AdminAPI/submitImport", {
+            "http://oraserv.cs.siena.edu:2000/AdminAPI/submitImport", {
                 'excelData': $scope.gridOptions.data,
             }
         ).then(function (response) {

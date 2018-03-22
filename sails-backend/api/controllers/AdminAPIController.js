@@ -33,7 +33,7 @@ module.exports = {
 
     getExport: function (req, res) {
         var sample = req.param('excelData');
-        DonorData.create(sample).exec(function (err, result) {
+        DonorData.findOrCreate(sample).exec(function (err, result) {
             if (err) {
                 sails.log.error(err);
             }
