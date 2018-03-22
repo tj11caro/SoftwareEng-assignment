@@ -11,7 +11,7 @@ module.exports = {
         if (!req.session.user) {
             console.log(" req.session.user", req.session.user, " is not Defined")
         }
-        res.json({ user: req.session.user });
+        res.json(req.session.user);
     },
 
     getUserAccounts: function (req, res) {
@@ -109,9 +109,9 @@ module.exports = {
                 req.session.cookie.expires = newDateOdj;
                 req.session.authenticated = true;
 
-                console.log("Session => ", req.session);
                 req.session.user = user;
-                res.json(user);
+                console.log("Session => ", req.session, "\nUser => " + req.session.user);
+                res.json(req.session.user);
             });
         });
     },

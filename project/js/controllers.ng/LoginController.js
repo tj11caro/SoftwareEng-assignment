@@ -10,10 +10,13 @@ app.controller('LoginController', ['$scope', '$http', '$window', '$env', functio
                 $scope.session = new Object();
                 $scope.session.user = response.data;
                 console.log(response.data);
+                console.log($scope.session.user);
                 if ($scope.session.user.userType === "admin") {
                     $window.location.href = $env.projectRoot + 'views/admin/admin.html';
                 } else if ($scope.session.user.userType === "volunteer") {
                     $window.location.href = $env.projectRoot + 'views/user/user.html';
+                } else {
+                    console.log("This is an error Check How Are you seeing this");
                 }
             }, function (response) {
                 // on error
