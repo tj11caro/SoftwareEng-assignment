@@ -1,6 +1,7 @@
 app.controller('LoginController', ['$scope', '$http', '$window', function ($scope, $http, $window) {
 
     $scope.submitLogin = function () {
+        console.log("Look at this -> ", app.globalVars);
         $http.post(
             'htpp://oraserv.cs.siena.edu:2000/UserAPI/login', {
                 'email': $scope.email,

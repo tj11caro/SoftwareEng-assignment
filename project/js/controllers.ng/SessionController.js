@@ -2,6 +2,7 @@
 app.controller('SessionController', ['$scope', '$http', '$window', function ($scope, $http, $window) {
 
     $scope.getSession = function () {
+        console.log("Look at this -> ", app.globalVars);
         if ($scope.user) {
             //This line may never be excuted because GetMe is traditionally an init me
             console.log("Session was Remember on Client");
