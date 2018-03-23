@@ -62,7 +62,7 @@ var templateFilesToInject = [
 // Default path for public folder (see documentation for more information)
 var tmpPath = '.tmp/public/';
 // var tmpPath = '. ./../project/';
-console.log(tmpPath);
+// console.log(tmpPath);
 
 // Prefix relative paths to source files so they point to the proper locations
 // (i.e. where the other Grunt tasks spit them out, or in some cases, where

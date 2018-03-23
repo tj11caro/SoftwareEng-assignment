@@ -23,7 +23,8 @@
 NOTE: it is important that you plug in the ng-app to the body. Also there is an import statement at the bottom that points the file to the app.js file
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
 
-<body ng-app="AnnualFund" class="fixed-nav sticky-footer bg-dark" id="page-top">
+<body ng-app="AnnualFund" ng-controller="SessionController" ng-init="getSession()" class="fixed-nav sticky-footer bg-dark"
+  id="page-top">
 
 
   <div ng-include="'admin-nav.html'"></div>
@@ -32,7 +33,7 @@ NOTE: it is important that you plug in the ng-app to the body. Also there is an 
 NOTE: Pay attention to the ng-controller. This is signifying that everything in this div has access to the variables and functions in the MainController. 
 ng-init signifies that as soon as this div is initialized, the getProspects() function is going to be called. That function populates the prospects variable. 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
-  <div ng-controller="MainController" class="content-wrapper" ng-init="getProspects()">
+  <div class="content-wrapper" ng-controller="MainController" ng-init="getProspects()">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
@@ -48,26 +49,28 @@ ng-init signifies that as soon as this div is initialized, the getProspects() fu
       <div class="col-lg-12">
         <div class="card mb-3">
           <div class="card-header">
-            <i class="fa fa-table"></i> Prospect List</div>
+            <i class="fa fa-table scrollable"></i> Prospect List</div>
           <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <div class="table-responsive scrollable ">
+              <table class="table table-bordered scrollable" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                   <tr>
-                    <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Grad Year</th>
-                    <th>Phone</th>
+                    <th>Ask Amount</th>
+                    <th>Phone Number</th>
+                    <th>Email Address</th>
+                    <th>Time Claimed</th>
                     <th>Assigned User</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tfoot>
                   <tr>
-                    <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Grad Year</th>
-                    <th>Phone</th>
+                    <th>Ask Amount</th>
+                    <th>Phone Number</th>
+                    <th>Email Address</th>
+                    <th>Time Claimed</th>
                     <th>Assigned User</th>
                     <th></th>
                   </tr>
@@ -81,11 +84,12 @@ The <tr> table row is repeated for every element in the prospects array, and the
                   <tr ng-repeat="i in prospects">
                     <td>{{ i.DONOR_FIRST_NAME }}</td>
                     <td>{{ i.DONOR_LAST_NAME }}</td>
-                    <td>{{ i.DONOR_PREF_CLASS }} </td>
+                    <td> [[UnImplemented]] </td>
                     <td>{{ i.UV_PHONE }}</td>
+                    <td>{{ i.PREFERRED_EMAIL_ADDRESS }} </td>
                     <td>{{ i.AF_ASSIGNED_USER }}</td>
                     <td>
-                      <p ng-click="postAssignUser(i.PIDM_KEY, 'rl07bebb@siena.edu')" class="btn btn-warning mt-3">Assign To Me</p>
+                      <p ng-click="postAssignUser(i.PIDM_KEY, session.user.email)" class="btn btn-warning mt-3">Assign To Me</p>
                     </td>
                   </tr>
                 </tbody>
@@ -130,35 +134,32 @@ The <tr> table row is repeated for every element in the prospects array, and the
         </div>
       </div>
     </div>
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
-    <!-- Custom scripts for this page-->
-    <script src="js/sb-admin-datatables.min.js"></script>
-    <script src="js/sb-admin-charts.min.js"></script>
-
-    <!-- Angular Imports -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.min.js"></script>
-
-
-    <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-NOTE: These import statements I had to add, make sure they are there, otherwise things might not work. 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
-    <!-- Modules -->
-    <script src="../../js/app.js"></script>
-
-    <!-- Controllers -->
-    <script src="../../js/controllers/MainController.js"></script>
   </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="../../vendor/jquery/jquery.min.js"></script>
+  <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="../../vendor/chart.js/Chart.min.js"></script>
+  <script src="../../vendor/datatables/jquery.dataTables.js"></script>
+  <script src="../../vendor/datatables/dataTables.bootstrap4.js"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="../../js/sb-admin.min.js"></script>
+  <!-- Custom scripts for this page-->
+  <script src="../../js/sb-admin-datatables.min.js"></script>
+  <script src="../../js/sb-admin-charts.min.js"></script>
+
+  <!-- Angular Imports -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.min.js"></script>
+
+  <!-- Modules -->
+  <script src="../../js/app.js"></script>
+
+  <!-- Controllers -->
+  <script src="../../js/controllers.ng/MainController.js"></script>
+  <script src="../../js/controllers.ng/SessionController.js"></script>
 </body>
 
 </html>

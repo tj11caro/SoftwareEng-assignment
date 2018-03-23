@@ -23,77 +23,74 @@ module.exports.http = {
 
   middleware: {
 
-  /***************************************************************************
-  *                                                                          *
-  * The order in which middleware should be run for HTTP request. (the Sails *
-  * router is invoked by the "router" middleware below.)                     *
-  *                                                                          *
-  ***************************************************************************/
+    /***************************************************************************
+    *                                                                          *
+    * The order in which middleware should be run for HTTP request. (the Sails *
+    * router is invoked by the "router" middleware below.)                     *
+    *                                                                          *
+    ***************************************************************************/
 
-     order: [
-       'startRequestTimer',
-       'cookieParser',
-       'session',
-       'accessControlHeader',
-       'myRequestLogger',
-       'handleBodyParserError',
-       'compress',
-       'methodOverride',
-       'poweredBy',
-       '$custom',
-       'router',
-       'www',
-       'favicon',
-       '404',
-       '500'
-     ],
-      
-      
+    // order: [
+    //   'startRequestTimer',
+    //   'cookieParser',
+    //   'session',
+    //   // 'myRequestLogger',
+    //   'accessControlHeader',
+    //   // 'bodyParser',
+    //   'handleBodyParserError',
+    //   'compress',
+    //   'methodOverride',
+    //   'poweredBy',
+    //   '$custom',
+    //   'router',
+    //   'www',
+    //   'favicon',
+    //   '404',
+    //   '500'
+    // ],
 
-  /****************************************************************************
-  *                                                                           *
-  * Example custom middleware; logs each request to the console.              *
-  *                                                                           *
-  ****************************************************************************/
+    /****************************************************************************
+    *                                                                           *
+    * Example custom middleware; logs each request to the console.              *
+    *                                                                           *
+    ****************************************************************************/
 
-     myRequestLogger: function (req, res, next) {
-         console.log("Requested :: ", req.method, req.url);
-         return next();
-     },
-      
-    accessControlHeader: function (req, res, next) {
-      res.setHeader('Access-Control-Allow-Origin', 'http://oraserv.cs.siena.edu');
+    // myRequestLogger: function (req, res, next) {
+    //   console.log("Requested :: ", req.method, req.url);
+    //   return next();
+    // },
 
-      // Request methods you wish to allow
-      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    // accessControlHeader: function (req, res, next) {
+    //   res.setHeader('Access-Control-Allow-Origin', 'http://oraserv.cs.siena.edu');
 
-      // Request headers you wish to allow
-      res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    //   // Request methods you wish to allow
+    //   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
-      // Set to true if you need the website to include cookies in the requests sent
-      // to the API (e.g. in case you use sessions)
-      res.setHeader('Access-Control-Allow-Credentials', true);
-      // Pass to next layer of middleware
-      console.log(res.getHeader('Access-Control-Allow-Origin'));
-      next();
-    },
+    //   // Request headers you wish to allow
+    //   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    //   // Set to true if you need the website to include cookies in the requests sent
+    //   // to the API (e.g. in case you use sessions)
+    //   res.setHeader('Access-Control-Allow-Credentials', true);
+    //   next();
+    // },
 
 
-  /***************************************************************************
-  *                                                                          *
-  * The body parser that will handle incoming multipart HTTP requests. By    *
-  * default,Sails uses [skipper](http://github.com/balderdashy/skipper). See *
-  * https://github.com/expressjs/body-parser for other options. Note that    *
-  * Sails uses an internal instance of Skipper by default; to override it    *
-  * and specify more options, make sure to "npm install                      *
-  * skipper@for-sails-0.12 --save" in your app first. You can also specify a *
-  * different body parser or a custom function with req, res and next        *
-  * parameters (just like any other middleware function).                    *
-  *                                                                          *
-  ***************************************************************************/
+    /***************************************************************************
+    *                                                                          *
+    * The body parser that will handle incoming multipart HTTP requests. By    *
+    * default,Sails uses [skipper](http://github.com/balderdashy/skipper). See *
+    * https://github.com/expressjs/body-parser for other options. Note that    *
+    * Sails uses an internal instance of Skipper by default; to override it    *
+    * and specify more options, make sure to "npm install                      *
+    * skipper@for-sails-0.12 --save" in your app first. You can also specify a *
+    * different body parser or a custom function with req, res and next        *
+    * parameters (just like any other middleware function).                    *
+    *                                                                          *
+    ***************************************************************************/
 
 
-    //bodyParser: require('skipper')({strict: true})
+    // bodyParser: require('skipper')({ strict: true })
 
   },
 
