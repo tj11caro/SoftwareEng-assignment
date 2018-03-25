@@ -1,9 +1,15 @@
-app.controller('XlsxController', ['$scope', '$http', 'SheetJSExportService', function ($scope, $http, SheetJSExportService) {
+app.controller('XlsxController', ['$scope', '$http', 'SheetJSExportService', '$env', function ($scope, $http, SheetJSExportService, $env) {
     $scope.gridOptions = {
         columnDefs: [
             { field: 'name' },
             { field: 'gender', visible: false },
             { field: 'company' }
+        ],
+        wscols: [
+            { wch: 6 }, // "characters"
+            { wpx: 50 }, // "pixels"
+            ,
+            { hidden: true } // hide column
         ],
         enableGridMenu: true,
         enableSelectAll: true,
@@ -14,8 +20,8 @@ app.controller('XlsxController', ['$scope', '$http', 'SheetJSExportService', fun
             $scope.gridApi = gridApi;
         },
         /* SheetJS Service setup */
-        filename: "Example.csv",
-        sheetname: "ng-SheetJS",
+        filename: "None",
+        sheetname: "None",
         gridMenuCustomItems: [
             {
                 title: 'Export all data as XLSX',
@@ -40,7 +46,7 @@ app.controller('XlsxController', ['$scope', '$http', 'SheetJSExportService', fun
     $scope.submitImport = function () {
         console.log($scope.gridOptions.data);
         $http.post(
-            "http://oraserv.cs.siena.edu:2000/AdminAPI/submitImport", {
+            $env.apiRoot + "AdminAPI/submitImport", {
                 'excelData': $scope.gridOptions.data,
             }
         ).then(function (response) {
