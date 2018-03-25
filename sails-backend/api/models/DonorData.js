@@ -15,6 +15,7 @@ module.exports = {
 
     PIDM_KEY: { type: 'integer', size: 11, required: true, primaryKey: true, },
 
+    ASK_AMT: { type: "String", size: 12 },
     BU_CITY: { type: 'String', size: 225 },
     BU_EMAIL: { type: 'String', size: 225 },
     BU_NATN_DESC: { type: 'String', size: 225 },
