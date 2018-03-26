@@ -9,9 +9,10 @@ module.exports = {
 
     getSession: function (req, res) {
         if (!req.session.user) {
-            console.log(" req.session.user", req.session.user, " is not Defined")
+            console.log(" req.session.user is not Defined")
+            return res.send(401, { err: "No Session Found" });
         }
-        res.json({ user: req.session.user });
+        res.json(req.session.user);
     },
 
     getUserAccounts: function (req, res) {
@@ -23,14 +24,14 @@ module.exports = {
         });
     },
 
-    getProspects: function (req, res) {
-        DonorData.find({}).exec(function (err, result) {
+    getAvailableProspects: function (req, res) {
+        var query = "SELECT * FROM donordata d LEFT JOIN lafapi laf ON d.PIDM_KEY = laf.DONOR_PIDM_KEY WHERE laf.DONOR_PIDM_KEY IS NULL";
+        DonorData.query(query, null, function (err, result) {
             res.json(result);
         });
     },
 
     //              Generic     Account       Creation         Of User            
-
     signup: function (req, res) {
         var volPidm = req.param('vpidm');
         var volEmail = req.param('vemail');
@@ -59,11 +60,17 @@ module.exports = {
 
                 }
             );
-        };
+        } else {
+            res.send(401, { err: "Unauthorized Access" });
+        }
+    },
+
+    logout: function (req, res) {
+        req.session.user = null;
+        return res.send(200);
     },
 
     login: function (req, res) {
-        console.log(req.params.all());
         var password = req.param('password');
         if (!req.param('email') || !password) {
             var missInput = [{ name: 'usernamePasswordRequired', message: 'You need to provide the appropriate credentials' }];
@@ -79,16 +86,15 @@ module.exports = {
             }
             //No user Found With Email
             if (!user) {
-                var missUser = [{ name: 'noUserFound', message: 'Incorrect Credentials' }];
+                var missUser = [{ name: 'noUserFound', message: 'Invalid Credentials' }];
                 req.session.flash = {
                     err: missUser
                 }
                 console.log(req.session.flash.err);
-                return res.redirect('/project/login.html');
+                return res.send(401, { err: "Invalid Credentials" });
             }
 
             var bcrypt = require('bcrypt-nodejs');
-            console.log(user.ePassword);
             bcrypt.compare(password, user.ePassword, function (err, valid) {
                 //General Error Detection
                 if (err) {
@@ -100,16 +106,15 @@ module.exports = {
                     req.session.flash = {
                         err: missUser
                     }
-                    return res.redirect('/project/login.html');
+                    return res.send(401, { err: "Invalid Credentials" });
                 }
                 var oldDateObj = new Date();
                 var newDateOdj = new Date(oldDateObj.getTime() + 86400 * 1000);//One Day
                 req.session.cookie.expires = newDateOdj;
                 req.session.authenticated = true;
 
-                console.log("Session => ", req.session);
                 req.session.user = user;
-                res.json(user);
+                res.json(req.session.user);
             });
         });
     },
@@ -141,7 +146,7 @@ module.exports = {
                         }
                         console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Client-Error~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                         sails.log.error(req.session.flash.err);
-                        return res.redirect('/project/login.html');
+                        return res.send(401, { err: "Invalid Credentials" });
                     }
 
                     var oldDateObj = new Date();
@@ -151,7 +156,7 @@ module.exports = {
 
                     sails.log(req.session);
                     req.session.user = user;
-                    return res.redirect('/project/views/admin/admin.html');
+                    return res.json(user);
                 }
             );
         }

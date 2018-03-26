@@ -31,7 +31,9 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
-
+  '/': function (req, res) {
+    return res.redirect("http://oraserv.cs.siena.edu/~perm_team1_2017/GitRepos/AnnualFund2017-18/project/login.html");
+  }
 
   /***************************************************************************
   *                                                                          *
