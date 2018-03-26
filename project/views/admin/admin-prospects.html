@@ -1,24 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>Siena College Annual Fund</title>
-  <!-- Bootstrap core CSS-->
-  <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
-  <link href="../../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Page level plugin CSS-->
-  <link href="../../vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-  <!-- Custom styles for this template-->
-  <link href="../../css/sb-admin.css" rel="stylesheet">
-  <link href="../../css/laf.css" rel="stylesheet">
-</head>
-
 <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 NOTE: it is important that you plug in the ng-app to the body. Also there is an import statement at the bottom that points the file to the app.js file
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
@@ -27,7 +6,7 @@ NOTE: it is important that you plug in the ng-app to the body. Also there is an 
   id="page-top">
 
 
-  <div ng-include="'admin-nav.html'"></div>
+<div ng-include="'views/admin/admin-nav.html'"></div>  
 
   <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 NOTE: Pay attention to the ng-controller. This is signifying that everything in this div has access to the variables and functions in the MainController. 
@@ -161,5 +140,3 @@ The <tr> table row is repeated for every element in the prospects array, and the
   <script src="../../js/controllers.ng/MainController.js"></script>
   <script src="../../js/controllers.ng/SessionController.js"></script>
 </body>
-
-</html>
