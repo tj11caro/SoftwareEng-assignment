@@ -5,6 +5,8 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
         $http.get($env.apiRoot + "UserAPI/getUserAccounts")
             .then(function (response) {
                 $scope.userAccounts = response.data;
+            }, function (response) {
+                //Failure  
             });
     };
 
@@ -16,8 +18,11 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
                 'pidm': pidmParam,
                 'user': userParam
             }
-        ).success(function (data) {
+        ).then(function (data) {
+            //Success
             $scope.getProspects();
+        }, function (response) {
+            //Failure  
         });
     };
 
@@ -25,6 +30,8 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
         $http.get($env.apiRoot + "VolunteerAPI/getUserProspects")
             .then(function (response) {
                 $scope.prospects = response.data;
+            }, function (response) {
+                //Failure  
             });
     };
 
@@ -34,6 +41,27 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
         $scope.getprospects.range = $scope.getprospects.range || 10;
         $http.post(
             $env.apiRoot + "AdminAPI/getSomeProspects", {
+                'range': $scope.getprospects.range,
+                'page': $scope.getprospects.page,
+            }
+        ).then(function (response) {
+            if (response.data.length == 0) {
+                $scope.getprospects.page -= 1;
+                $scope.getSomeProspects();
+            }
+            $scope.prospects = response.data;
+        }, function (response) {
+            // on error                
+            console.log("Error Not Reached Server");
+        });
+    };
+
+    $scope.getSomeAvailableProspects = function () {
+        $scope.getprospects = $scope.getprospects == undefined ? new Object() : $scope.getprospects;
+        $scope.getprospects.page = $scope.getprospects.page || 1;
+        $scope.getprospects.range = $scope.getprospects.range || 10;
+        $http.post(
+            $env.apiRoot + "VolunteerAPI/getSomeAvailableProspects", {
                 'range': $scope.getprospects.range,
                 'page': $scope.getprospects.page,
             }
@@ -120,13 +148,17 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
         }).then(function (response) {
             $scope.prospects = response.data;
             console.log(response);
+        }, function (response) {
+            //Failure  
         });
     }
 
     $scope.setRange = function (element) {
         $scope.$apply(function ($scope) {
             $scope.getprospects.range = element.value;
+            // if($scope.s){
             $scope.getSomeProspects();
+            // }
         });
     };
 

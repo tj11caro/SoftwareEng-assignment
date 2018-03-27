@@ -1,5 +1,5 @@
 app.controller('LoginController', ['$scope', '$http', '$location', 'user', function ($scope, $http, $location, user) {
-
+    console.log("Not .ng");
 
     $scope.submitLogin = function () {
 

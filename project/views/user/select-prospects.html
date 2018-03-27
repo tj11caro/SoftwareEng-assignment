@@ -1,0 +1,114 @@
+<body ng-app="AnnualFund" ng-controller="SessionController" ng-init="getSession()" class="fixed-nav sticky-footer bg-dark"
+  id="page-top">
+  <!-- Navigation-->
+  <div ng-include="'views/user/user-nav.html'"></div>
+
+
+  <div ng-controller="MainController" class="content-wrapper" ng-init="getProspects()">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+      </ol>
+
+      <div class="col-lg-12">
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fa fa-table scrollable"></i> Prospect List
+            <form>
+              <div class="row control-group pull-right ">
+                <div class="col col-auto my-1">
+                  <label class="mr-sm-2" for="inlineFormCustomSelect">Donors per Page</label>
+                  <select class="pull-right custom-select mr-sm-2" id="inlineFormCustomSelect" onchange="angular.element(this).scope().setRange(this)">
+                    <option selected>10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                </div>
+                <div class="col col-auto my-1">
+                  <button class="btn btn-info" ng-click="prospectPageDecrement()">Back</button>
+                </div>
+                <div class=" col col-auto my-1">
+                  <button class="btn btn-primary" ng-click="prospectPageIncrement()">Next</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive scrollable ">
+              <table class="table table-bordered scrollable" width="100%" cellspacing="0" ng-init="getSomeProspects()">
+                <thead>
+                  <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Grad Year</th>
+                    <th>Phone</th>
+                    <!-- <th>Assigned User</th> -->
+                    <th>Claim</th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Grad Year</th>
+                    <th>Phone</th>
+                    <!-- <th>Assigned User</th> -->
+                    <th>Claim</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  <tr ng-repeat="i in prospects">
+                    <td>{{ i.DONOR_FIRST_NAME }}</td>
+                    <td>{{ i.DONOR_LAST_NAME }}</td>
+                    <td>{{ i.DONOR_PREF_CLASS }} </td>
+                    <td>{{ i.UV_PHONE }}</td>
+                    <!-- <td>Claim</td> -->
+                    <td>
+                      <p ng-click="assign(i.PIDM_KEY, 'rl07bebb@siena.edu')" class="btn btn-warning mt-3">Assign To Me</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>
+    </div>
+    <!-- Example DataTables Card-->
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>Copyright © Siena College Annual Fund</small>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="login.html">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

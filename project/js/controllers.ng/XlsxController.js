@@ -1,9 +1,8 @@
-app.controller('XlsxController', ['$scope', '$http', 'SheetJSExportService', '$env', function ($scope, $http, SheetJSExportService, $env) {
+app.controller('XlsxController', ['$scope', '$http', 'SheetJSExportService', function ($scope, $http, SheetJSExportService) {
+
     $scope.gridOptions = {
         columnDefs: [
-            { field: 'name' },
-            { field: 'gender', visible: false },
-            { field: 'company' }
+
         ],
         wscols: [
             { wch: 6 }, // "characters"
@@ -54,8 +53,4 @@ app.controller('XlsxController', ['$scope', '$http', 'SheetJSExportService', '$e
             // $scope.prospects = response.data;
         });
     };
-
-
-    $http.get('https://cdn.rawgit.com/angular-ui/ui-grid.info/gh-pages/data/100.json').success(function (data) { $scope.gridOptions.data = data; });
-
 }]);

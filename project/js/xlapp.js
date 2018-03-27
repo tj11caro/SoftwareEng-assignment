@@ -11,6 +11,18 @@ app.constant("$env", {
     // apiRoot: "http://oraserv.cs.siena.edu:2000/",
 });
 
+app.run(function ($env, $rootScope, $location) {
+    $rootScope.$watch(function () {
+        return $location.path();
+    },
+        function (a) {
+            if (a.length > 0) {
+                console.log($env.projectRoot + "#" + a);
+                window.location.replace($env.projectRoot + "#" + a);
+            }
+        });
+});
+
 app.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.withCredentials = true;
 }]);
