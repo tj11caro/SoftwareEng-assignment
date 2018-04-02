@@ -16,7 +16,12 @@ module.exports = {
     },
 
     getUserAccounts: function (req, res) {
-        UserAPI.find({}).exec(function (err, users) {
+
+        var page = req.param("page");
+        var range = req.param("range");
+        var start = range * (page - 1);
+        console.log("UserApi getUserAccounts", page, range, start);
+        UserAPI.find({}).skip(start).limit(range).exec(function (err, users) {
             if (err) {
                 res.send(500, { error: 'Database Error ERR#0002' });
             }
@@ -24,9 +29,14 @@ module.exports = {
         });
     },
 
-    getAvailableProspects: function (req, res) {
-        var query = "SELECT * FROM donordata d LEFT JOIN lafapi laf ON d.PIDM_KEY = laf.DONOR_PIDM_KEY WHERE laf.DONOR_PIDM_KEY IS NULL";
-        DonorData.query(query, null, function (err, result) {
+    getSomeAvailableProspects: function (req, res) {
+        var page = req.param("page");
+        var range = req.param("range");
+        var start = range * (page - 1);
+        console.log("UserAPI getAvailableProspects", page, range, start);
+        var query = "SELECT * FROM donordata d LEFT JOIN lafapi laf ON d.PIDM_KEY = laf.DONOR_PIDM_KEY WHERE laf.DONOR_PIDM_KEY IS NULL LIMIT ? OFFSET ?";
+        DonorData.query(query, [range, start], function (err, result) {
+            console.log(result);
             res.json(result);
         });
     },
@@ -41,7 +51,7 @@ module.exports = {
                 {
                     pidm: volPidm,
                     email: volEmail,
-                    password: volPassword,
+                    ePassword: volPassword,
                     userType: "volunteer"
                 }, function userCreated(err, user) {
                     if (err) {
@@ -50,14 +60,14 @@ module.exports = {
                         }
                         console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Client-Error~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                         console.log(req.session.flash.err);
-                        return res.redirect('/project/login.html');
+                        return res.send(500, { err: "Flash Error" });
                     }
 
                     var oldDateObj = new Date();
                     var newDateOdj = new Date(oldDateObj.getTime() + 86400 * 1000);//One Day
                     req.session.cookie.expires = newDateOdj;
                     req.session.authenticated = true;
-
+                    res.send(200);
                 }
             );
         } else {
@@ -82,7 +92,7 @@ module.exports = {
         UserAPI.findOne({ email: req.param('email') }).exec(function (err, user) {
             //General Error Detection
             if (err) {
-                return next(err);
+                // return next(err);
             }
             //No user Found With Email
             if (!user) {

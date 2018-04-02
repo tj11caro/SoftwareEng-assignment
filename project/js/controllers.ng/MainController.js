@@ -1,13 +1,29 @@
+// import { connect } from "tls";
+
 app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $http, $env) {
+    $scope.tableData = new Object();
+    $scope.tableData.buttonText = "Next";
 
     //This function populates the userAccounts variable with all the user accounts in our current test Users table. 
     $scope.getUserAccounts = function () {
-        $http.get($env.apiRoot + "UserAPI/getUserAccounts")
-            .then(function (response) {
-                $scope.userAccounts = response.data;
-            }, function (response) {
-                //Failure  
-            });
+        $scope.tableData.page = $scope.tableData.page || 1;
+        $scope.tableData.range = $scope.tableData.range || 10;
+        $http.post(
+            $env.apiRoot + "UserAPI/getUserAccounts", {
+                'range': $scope.tableData.range,
+                'page': $scope.tableData.page,
+            }
+        ).then(function (response) {
+            if (response.data.length == 0) {
+                $scope.tableData.page -= 1;
+                $scope.getUserAccounts();
+            }
+            $scope.userAccounts = response.data;
+            $scope.tableData.range = $scope.userAccounts.length;
+        }, function (response) {
+            // on error                
+            console.log("Error Not Reached Server");
+        });
     };
 
     //This function currently takes in a pidm, and a username/email and writes the username/email to the pidm's prospect in the database. 
@@ -26,6 +42,7 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
         });
     };
 
+    //Admin Method
     $scope.getUserProspects = function () {
         $http.get($env.apiRoot + "VolunteerAPI/getUserProspects")
             .then(function (response) {
@@ -35,67 +52,77 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
             });
     };
 
+    //Admin Method
     $scope.getSomeProspects = function () {
-        $scope.getprospects = $scope.getprospects == undefined ? new Object() : $scope.getprospects;
-        $scope.getprospects.page = $scope.getprospects.page || 1;
-        $scope.getprospects.range = $scope.getprospects.range || 10;
+        $scope.tableData = $scope.tableData == undefined ? new Object() : $scope.tableData;
+        $scope.tableData.page = $scope.tableData.page || 1;
+        $scope.tableData.range = $scope.tableData.range || 10;
         $http.post(
             $env.apiRoot + "AdminAPI/getSomeProspects", {
-                'range': $scope.getprospects.range,
-                'page': $scope.getprospects.page,
+                'range': $scope.tableData.range,
+                'page': $scope.tableData.page,
             }
         ).then(function (response) {
             if (response.data.length == 0) {
-                $scope.getprospects.page -= 1;
+                $scope.tableData.page -= 1;
                 $scope.getSomeProspects();
             }
             $scope.prospects = response.data;
+            $scope.tableData.range = $scope.prospects.length;
         }, function (response) {
             // on error                
             console.log("Error Not Reached Server");
         });
     };
 
-    $scope.getSomeAvailableProspects = function () {
-        $scope.getprospects = $scope.getprospects == undefined ? new Object() : $scope.getprospects;
-        $scope.getprospects.page = $scope.getprospects.page || 1;
-        $scope.getprospects.range = $scope.getprospects.range || 10;
+    //Volunteer Method
+    $scope.getMyProspects = function () {
+        $scope.tableData = $scope.tableData == undefined ? new Object() : $scope.tableData;
+        $scope.tableData.page = $scope.tableData.page || 1;
+        $scope.tableData.range = $scope.tableData.range || 10;
         $http.post(
-            $env.apiRoot + "VolunteerAPI/getSomeAvailableProspects", {
-                'range': $scope.getprospects.range,
-                'page': $scope.getprospects.page,
+            $env.apiRoot + "VolunteerAPI/getMyProspects", {
+                'range': $scope.tableData.range,
+                'page': $scope.tableData.page,
             }
         ).then(function (response) {
             if (response.data.length == 0) {
-                $scope.getprospects.page -= 1;
-                $scope.getSomeProspects();
+                $scope.tableData.page -= 1;
+                $scope.getMyProspects();
             }
             $scope.prospects = response.data;
+            $scope.tableData.range = $scope.prospects.length;
         }, function (response) {
             // on error                
             console.log("Error Not Reached Server");
         });
     };
 
-    $scope.prospectPageIncrement = function () {
-        $scope.getprospects.page += 1;
-        $scope.getSomeProspects();
+    //Volunteer Method
+    $scope.getSomeAvailableProspects = function () {
+        $scope.tableData = $scope.tableData == undefined ? new Object() : $scope.tableData;
+        $scope.tableData.page = $scope.tableData.page || 1;
+        $scope.tableData.range = $scope.tableData.range || 10;
+        $http.post(
+            $env.apiRoot + "UserAPI/getSomeAvailableProspects", {
+                'range': $scope.tableData.range,
+                'page': $scope.tableData.page,
+            }
+        ).then(function (response) {
+            if (response.data.length == 0) {
+                $scope.tableData.page -= 1;
+                $scope.getSomeAvailableProspects();
+            }
+            console.log("getSomeAvailableProspects");
+            $scope.prospects = response.data;
+            $scope.tableData.range = $scope.prospects.length;
+        }, function (response) {
+            // on error                
+            console.log("Error Not Reached Server");
+        });
     };
 
-    $scope.prospectPageDecrement = function () {
-        if ($scope.getprospects.page > 1) {
-            $scope.getprospects.page -= 1;
-        }
-        $scope.getSomeProspects();
-    };
-
-    $scope.getAvailableProspects = function () {
-        $http.get($env.apiRoot + "VolunteerAPI/getAvailableProspects")
-            .then(function (response) {
-                $scope.prospects = response.data;
-            });
-    };
-
+    //User Method
     $scope.buildQuery = function () {
         // var newQuery = "SELECT * FROM TESTTABLE1 where ";
 
@@ -153,24 +180,49 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
         });
     }
 
-    $scope.setRange = function (element) {
+    //User Method
+    $scope.prospectPageIncrement = function (runFunction) {
+        $scope.tableData.page += 1;
+        if (runFunction) {
+            runFunction();
+        }
+        $scope.tableData.buttonText = "Next";
+    };
+
+    //User Method
+    $scope.prospectPageDecrement = function (runFunction) {
+        if ($scope.tableData.page > 1) {
+            $scope.tableData.page -= 1;
+        }
+        if (runFunction) {
+            runFunction();
+        }
+        $scope.tableData.buttonText = "Next";
+    };
+
+    //User Method    
+    $scope.setRange = function (element, runFunction) {
         $scope.$apply(function ($scope) {
-            $scope.getprospects.range = element.value;
-            // if($scope.s){
-            $scope.getSomeProspects();
-            // }
+            $scope.tableData.range = element.value;
+            $scope.tableData.page = 0;
+            $scope.tableData.buttonText = "Update";
+            // runFunction();
         });
     };
 
+    //User Method
     $scope.range = function (max, item, min, step) {
         step = step || 1;
         min = min || 0;
         var input = [];
+        if (!item) {
+            return;
+        }
+        max = item.length || max;
         for (var i = min; i < max; i += step) {
             input.push(item[i]);
         }
         return input;
     };
-
 }]);
 

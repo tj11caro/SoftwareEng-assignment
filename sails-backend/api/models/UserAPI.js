@@ -64,7 +64,9 @@ module.exports = {
       return next({ err: ["Password doesn't match doesn't Exist ERR#0006"] });
     }
 
-    require('bcrypt-nodejs').hash(values.ePassword, 10, function passwordEncrypter(err, ePassword) {
+    var bcrypter = require('bcrypt-nodejs')
+    var salt = bcrypter.genSaltSync(10);
+    bcrypter.hash(values.ePassword, salt, null, function passwordEncrypter(err, ePassword) {
       if (err) { return next(err); }
       values.ePassword = ePassword;
       values.online = true;

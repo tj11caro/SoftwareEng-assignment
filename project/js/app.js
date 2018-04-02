@@ -38,6 +38,18 @@ app.config(function ($routeProvider) {
             templateUrl: "views/admin/admin-prospects.html",
             controller: "SessionController",
         })
+        .when("/admin/create-admin", {
+            templateUrl: "create-admin.html",
+            controller: "SessionController",
+        })
+        .when("/admin/create-volunteer", {
+            templateUrl: "signup.html",
+            controller: "SessionController",
+        })
+        .when("/successful-request", {
+            templateUrl: "successful-request.html",
+            controller: "SessionController",
+        })
         .when("/admin/import", {
             controller: function () {
                 console.log("Somthing");

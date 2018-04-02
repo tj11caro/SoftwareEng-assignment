@@ -1,99 +1,90 @@
-<body ng-app="AnnualFund" ng-controller="SessionController" ng-init="getSession()" class="fixed-nav sticky-footer bg-dark"
-  id="page-top">
+<div ng-include="'views/admin/admin-nav.html'"></div>
+
+<div ng-controller="MainController" class="content-wrapper">
+  <div class="container-fluid">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="admin.html">Admin Console</a>
+      </li>
+      <li class="breadcrumb-item active">Users</li>
+    </ol>
+
+    <!-- Example DataTables Card-->
 
 
-  <div ng-include="'views/admin/admin-nav.html'"></div>  
-
-  <div ng-controller="MainController" class="content-wrapper">
-    <div class="container-fluid">
-      <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="admin.html">Admin Console</a>
-        </li>
-        <li class="breadcrumb-item active">Users</li>
-      </ol>
-
-      <!-- Example DataTables Card-->
-
-      <div class="col-lg-12">
-        <div class="card mb-3">
-          <div class="card-header">
-            <i class="fa fa-table"></i> User Table</div>
-          <div class="card-body">
-            <div class="table-responsive" ng-init="getUserAccounts()">
-              <table class="table table-bordered" width="100%" cellspacing="0">
-                <thead>
-                  <tr>
-                    <th>PIDM</th>
-                    <th>Name</th>
-                    <th>isAdmin</th>
-                    <th>email</th>
-                  </tr>
-                </thead>
-                <tfoot>
-                  <tr>
-                    <th>PIDM</th>
-                    <th>Name</th>
-                    <th>Role</th>
-                    <th>email</th>
-                  </tr>
-                </tfoot>
-                <tbody>
-                  <tr ng-repeat="u in userAccounts">
-                    <td>{{ u.pidm }}</td>
-                    <td>{{ u.fname+ " "+u.lname }}</td>
-                    <td>{{ u.userType }}</td>
-                    <td>{{ u.email }}</td>
-                  </tr>
-                </tbody>
-              </table>
+    <div class="col-lg-12">
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table scrollable"></i> User List
+          <form>
+            <div class="row control-group pull-right ">
+              <div class="col col-auto my-1">
+                <label class="mr-sm-2" for="inlineFormCustomSelect">Users per Page</label>
+                <select class="pull-right custom-select mr-sm-2" id="inlineFormCustomSelect" onchange="angular.element(this).scope().setRange(this,'getUserAccounts')">
+                  <option selected>10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+              </div>
+              <div class="col col-auto my-1">
+                <button class="btn btn-info" ng-click="prospectPageDecrement(getUserAccounts)">Back</button>
+              </div>
+              <div class=" col col-auto my-1">
+                <button class="btn btn-primary" ng-click="prospectPageIncrement(getUserAccounts)">{{tableData.buttonText }}</button>
+              </div>
             </div>
+          </form>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive scrollable ">
+            <table class="table table-bordered scrollable" width="100%" cellspacing="0" ng-init="getUserAccounts()">
+              <thead>
+                <tr>
+                  <th>PIDM</th>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>PIDM</th>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>Email</th>
+                </tr>
+              </tfoot>
+              <tbody>
+                <tr ng-repeat="u in range(tableData.range, userAccounts)">
+                  <td>{{ u.pidm }}</td>
+                  <td>{{ u.fname+ " "+u.lname }}</td>
+                  <td>{{ u.userType }}</td>
+                  <td>{{ u.email }}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <!-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> -->
         </div>
+        <!-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> -->
       </div>
-
-
-
     </div>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Siena College Annual Fund</small>
-        </div>
-      </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
-    </a>
+
+
+
   </div>
-  <!-- Bootstrap core JavaScript-->
-  <script src="../../vendor/jquery/jquery.min.js"></script>
-  <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- Core plugin JavaScript-->
-  <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
-  <!-- Page level plugin JavaScript-->
-  <script src="../../vendor/chart.js/Chart.min.js"></script>
-  <script src="../../vendor/datatables/jquery.dataTables.js"></script>
-  <script src="../../vendor/datatables/dataTables.bootstrap4.js"></script>
-  <!-- Custom scripts for all pages-->
-  <script src="../../js/sb-admin.min.js"></script>
-  <!-- Custom scripts for this page-->
-  <script src="../../js/sb-admin-datatables.min.js"></script>
-  <script src="../../js/sb-admin-charts.min.js"></script>
-
-  <!-- Angular Imports -->
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.min.js"></script>
-
-  <!-- Modules -->
-  <script src="../../js/app.js"></script>
-
-  <!-- Controllers -->
-  <script src="../../js/controllers.ng/MainController.js"></script>
-  <script src="../../js/controllers.ng/SessionController.js"></script>
-</body>
+  <!-- /.container-fluid-->
+  <!-- /.content-wrapper-->
+  <footer class="sticky-footer">
+    <div class="container">
+      <div class="text-center">
+        <small>Copyright © Siena College Annual Fund</small>
+      </div>
+    </div>
+  </footer>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fa fa-angle-up"></i>
+  </a>
+</div>

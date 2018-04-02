@@ -19,7 +19,7 @@ module.exports = {
         var page = req.param("page");
         var range = req.param("range");
         var start = range * (page - 1);
-        console.log(page, range, start);
+        console.log("AdminApi GetSomeProspects", page, range, start);
 
         DonorData.find({}).skip(start).limit(range).exec(function (err, result) {
 

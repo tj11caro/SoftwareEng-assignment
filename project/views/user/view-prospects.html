@@ -28,7 +28,7 @@
                       <div class="col col-auto my-1">
                         <!-- <label class="mr-sm-2" for="inlineFormCustomSelect">Donors per Page</label> -->
                         <!-- <i class="fa fa-table"></i> Claimed Prospect List</div> -->
-                        <select class="pull-right custom-select mr-sm-2" id="inlineFormCustomSelect" onchange="angular.element(this).scope().setRange(this)">
+                        <select class="pull-right custom-select mr-sm-2" id="inlineFormCustomSelect" onchange="angular.element(this).scope().setRange(this, getMyProspects)">
                           <option selected>10</option>
                           <option value="25">25</option>
                           <option value="50">50</option>
@@ -36,10 +36,10 @@
                         </select>
                       </div>
                       <div class="col col-auto my-1">
-                        <button class="btn btn-info" ng-click="prospectPageDecrement()">Back</button>
+                        <button class="btn btn-info" ng-click="prospectPageDecrement(getMyProspects)">Back</button>
                       </div>
                       <div class=" col col-auto my-1">
-                        <button class="btn btn-primary" ng-click="prospectPageIncrement()">Next</button>
+                        <button class="btn btn-primary" ng-click="prospectPageIncrement(getMyProspects)">Next</button>
                       </div>
                     </div>
                   </form>
@@ -68,7 +68,7 @@
                         </tr>
                       </tfoot>
                       <tbody>
-                        <tr ng-repeat="i in prospects">
+                        <tr ng-repeat="i in range(tableData.range, prospects) ">
                           <td>{{ i.DONOR_FIRST_NAME }}</td>
                           <td>{{ i.DONOR_LAST_NAME }}</td>
                           <td>{{ i.DONOR_PREF_CLASS }} </td>

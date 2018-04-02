@@ -1,131 +1,99 @@
+<div ng-include="'views/admin/admin-nav.html'">
+
+</div>
+
 <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-NOTE: it is important that you plug in the ng-app to the body. Also there is an import statement at the bottom that points the file to the app.js file
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
-
-<body ng-app="AnnualFund" ng-controller="SessionController" ng-init="getSession()" class="fixed-nav sticky-footer bg-dark"
-  id="page-top">
-
-
-<div ng-include="'views/admin/admin-nav.html'"></div>  
-
-  <!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 NOTE: Pay attention to the ng-controller. This is signifying that everything in this div has access to the variables and functions in the MainController. 
 ng-init signifies that as soon as this div is initialized, the getProspects() function is going to be called. That function populates the prospects variable. 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
-  <div class="content-wrapper" ng-controller="MainController">
-    <div class="container-fluid">
-      <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="admin.html">Admin Console</a>
-        </li>
-        <li class="breadcrumb-item active">Prospects</li>
-      </ol>
+<div class="content-wrapper" ng-controller="MainController">
+  <div class="container-fluid">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="admin.html">Admin Console</a>
+      </li>
+      <li class="breadcrumb-item active">Prospects</li>
+    </ol>
 
 
-      <!-- Example DataTables Card-->
+    <!-- Example DataTables Card-->
 
-      <div class="col-lg-12">
-        <div class="card mb-3">
-          <div class="card-header">
-            <i class="fa fa-table scrollable"></i> Prospect List
-            <form>
-              <div class="row control-group pull-right ">
-                <div class="col col-auto my-1">
-                  <label class="mr-sm-2" for="inlineFormCustomSelect">Donors per Page</label>
-                  <select class="pull-right custom-select mr-sm-2" id="inlineFormCustomSelect" onchange="angular.element(this).scope().setRange(this)">
-                    <option selected>10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                  </select>
-                </div>
-                <div class="col col-auto my-1">
-                  <button class="btn btn-info" ng-click="prospectPageDecrement()">Back</button>
-                </div>
-                <div class=" col col-auto my-1">
-                  <button class="btn btn-primary" ng-click="prospectPageIncrement()">Next</button>
-                </div>
+    <div class="col-lg-12">
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table scrollable"></i> Prospect List
+          <form>
+            <div class="row control-group pull-right ">
+              <div class="col col-auto my-1">
+                <label class="mr-sm-2" for="inlineFormCustomSelect">Donors per Page</label>
+                <select class="pull-right custom-select mr-sm-2" id="inlineFormCustomSelect" onchange="angular.element(this).scope().setRange(this,'getSomeProspects')">
+                  <option selected>10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
               </div>
-            </form>
-          </div>
-          <div class="card-body">
-            <div class="table-responsive scrollable ">
-              <table class="table table-bordered scrollable" width="100%" cellspacing="0" ng-init="getSomeProspects()">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Ask Amount</th>
-                    <th>Phone Number</th>
-                    <th>Email Address</th>
-                    <th>Time Claimed</th>
-                  </tr>
-                </thead>
-                <tfoot>
-                  <tr>
-                    <th>Name</th>
-                    <th>Ask Amount</th>
-                    <th>Phone Number</th>
-                    <th>Email Address</th>
-                    <th>Time Claimed</th>
-                  </tr>
-                </tfoot>
-                <tbody>
-                  <tr ng-repeat="i in range(getprospects.range, prospects) ">
-                    <td>{{ i.DONOR_FIRST_NAME+" "+i.DONOR_LAST_NAME }}</td>
-                    <td> {{i.ASK_AMT}} </td>
-                    <td>{{ i.UV_PHONE }}</td>
-                    <td>{{ i.PREFERRED_EMAIL_ADDRESS }} </td>
-                    <td>{{ i.AF_ASSIGNED_USER }}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="col col-auto my-1">
+                <button class="btn btn-info" ng-click="prospectPageDecrement(getSomeProspects)">Back</button>
+              </div>
+              <div class=" col col-auto my-1">
+                <button class="btn btn-primary" ng-click="prospectPageIncrement(getSomeProspects)">{{tableData.buttonText }}</button>
+              </div>
             </div>
+          </form>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive scrollable ">
+            <table class="table table-bordered scrollable" width="100%" cellspacing="0" ng-init="getSomeProspects()">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Ask Amount</th>
+                  <th>Phone Number</th>
+                  <th>Email Address</th>
+                  <th>Time Claimed</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Name</th>
+                  <th>Ask Amount</th>
+                  <th>Phone Number</th>
+                  <th>Email Address</th>
+                  <th>Time Claimed</th>
+                </tr>
+              </tfoot>
+              <tbody>
+                <tr ng-repeat="i in range(tableData.range, prospects) ">
+                  <td>{{ i.DONOR_FIRST_NAME+" "+i.DONOR_LAST_NAME }}</td>
+                  <td> {{i.ASK_AMT}} </td>
+                  <td>{{ i.UV_PHONE }}</td>
+                  <td>{{ i.PREFERRED_EMAIL_ADDRESS }} </td>
+                  <td>{{ i.AF_ASSIGNED_USER }}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
         </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
-
-
-
     </div>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Siena College Annual Fund</small>
-        </div>
-      </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
-    </a>
+
+
+
   </div>
-  <!-- Bootstrap core JavaScript-->
-  <script src="../../vendor/jquery/jquery.min.js"></script>
-  <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- Core plugin JavaScript-->
-  <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
-  <!-- Page level plugin JavaScript-->
-  <script src="../../vendor/chart.js/Chart.min.js"></script>
-  <script src="../../vendor/datatables/jquery.dataTables.js"></script>
-  <script src="../../vendor/datatables/dataTables.bootstrap4.js"></script>
-  <!-- Custom scripts for all pages-->
-  <script src="../../js/sb-admin.min.js"></script>
-  <!-- Custom scripts for this page-->
-  <script src="../../js/sb-admin-datatables.min.js"></script>
-  <script src="../../js/sb-admin-charts.min.js"></script>
-
-  <!-- Angular Imports -->
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.min.js"></script>
-
-  <!-- Modules -->
-  <script src="../../js/app.js"></script>
-
-  <!-- Controllers -->
-  <script src="../../js/controllers.ng/MainController.js"></script>
-  <script src="../../js/controllers.ng/SessionController.js"></script>
-</body>
+  <!-- /.container-fluid-->
+  <!-- /.content-wrapper-->
+  <footer class="sticky-footer">
+    <div class="container">
+      <div class="text-center">
+        <small>Copyright © Siena College Annual Fund</small>
+      </div>
+    </div>
+  </footer>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fa fa-angle-up"></i>
+  </a>
+</div>

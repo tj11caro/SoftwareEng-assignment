@@ -30,6 +30,8 @@ module.exports = {
             });
         },
     */
+
+
     getUserProspects: function (req, res) {
         if (!req.session.user) {
             console.log(" req.session.user", req.session.user, " is not Defined");
