@@ -1,30 +1,14 @@
-<!DOCTYPE html>
-<html>
+<div class="container" ng-controller="LoginController">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Siena College Annual Fund</title>
-    <!-- Bootstrap core CSS-->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom fonts for this template-->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <!-- Page level plugin CSS-->
-    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-    <!-- Custom styles for this template-->
-    <link href="css/login.css" rel="stylesheet">
-</head>
+    <div class="container border-0 mt-4 py-3 rounded bg-warning text-center mb-4 ">
+        <h1 class="h3 font-weight-normal ">
+            <img src="/_favicon.ico " alt=" " width="72" height="72 "> Siena College Annual Fund</h1>
+        <h3 class="h5 mb-3 font-weight-normal ">Sign Up Form</h3>
+    </div>
 
-<body ng-app="AnnualFund" style="background: #00594d" ng-controller="SessionController" ng-init="getSession()">
     <form class="form-signin rounded" ng-submit="submitSignUp()" style=" background: #e6e7e8 ">
-        <div class="text-center mb-4 ">
-            <!-- <img class="mb-4 " src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg " alt=" " width="72
-        " height="72 "> -->
-            <h1 class="h3 mb-3 font-weight-normal ">Siena College Annual Fund</h1>
-            <h3 class="h5 mb-3 font-weight-normal ">Sign Up Form</h3>
-        </div>
         <h1 class="h5 mb-3 font-weight-bold ">New Volunteer Information</h1>
-        <div class="container ">
+        <div class="container">
 
             <label for="inputVPidm ">Volunteer's PIDM</label>
             <div class="form-label-group ">
@@ -41,18 +25,7 @@
                 <input type="password" id="inputVPassword " ng-model="volunteer.password " class="form-control " required>
             </div>
         </div>
-        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Create Volunteer">
-        <p class="mt-5 mb-3 text-muted text-center ">&copy; 2017-2018</p>
+        <input class="m-4 btn btn-lg btn-primary " type="submit" value="Create Volunteer">
+        <p class="mt-5 mb-3 pb-3 text-muted text-center ">Siena College Annual Fund &copy; 2017-2018</p>
     </form>
-
-    <!-- Angular Imports -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js "></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.min.js "></script>
-
-    <!-- Modules -->
-    <script src="../../js/app.js"></script>
-    <script src="../../js/controllers.ng/SessionController.js"></script>
-
-</body>
-
-</html>
+</div>
