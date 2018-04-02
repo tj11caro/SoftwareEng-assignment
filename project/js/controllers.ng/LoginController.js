@@ -1,6 +1,5 @@
 // A N G U L A R   C O N T R O L L E R 
 app.controller('LoginController', ['$scope', '$http', '$window', '$location', '$env', function ($scope, $http, $window, $location, $env) {
-    console.log(" .ng");
 
     $scope.submitLogin = function () {
         $http.post(
@@ -59,7 +58,7 @@ app.controller('LoginController', ['$scope', '$http', '$window', '$location', '$
         ).then(function (response) {
             // on success
             //! This should really redirect to a Success Page
-            $location.path("/");
+            $location.path("/successful-request");
         }, function (response) {
             // on error                
             $location.path("/");
@@ -80,7 +79,7 @@ app.controller('LoginController', ['$scope', '$http', '$window', '$location', '$
             }
         ).then(function (response) {
             // on success
-            $window.location.href = "/admin/";
+            $location.path("/successful-request");
         }, function (response) {
             // on error
             $window.location.href = "/signup.html";

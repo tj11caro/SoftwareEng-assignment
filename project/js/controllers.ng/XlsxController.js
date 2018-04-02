@@ -1,4 +1,4 @@
-app.controller('XlsxController', ['$scope', '$http', 'SheetJSExportService', function ($scope, $http, SheetJSExportService) {
+app.controller('XlsxController', ['$scope', '$http', '$env', 'SheetJSExportService', function ($scope, $http, $env, SheetJSExportService) {
 
     $scope.gridOptions = {
         columnDefs: [
