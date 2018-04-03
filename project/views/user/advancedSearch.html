@@ -1,133 +1,111 @@
-<body ng-app="AnnualFund" ng-controller="SessionController" ng-init="getSession()" class="fixed-nav sticky-footer bg-dark"
-  id="page-top">
-  <!-- Navigation-->
-  <div ng-include="'views/user/user-nav.html'"></div>
-
-
-  <div ng-controller="MainController" class="content-wrapper" ng-init="getProspects()">
-    <div class="container-fluid">
-      <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="#">Dashboard</a>
-        </li>
-      </ol>
-      <div class="col-lg-12">
-        <div class="card mb-3">
-          <div class="card-header">
-            <li class="breadcrumb-item active">Advanced Search</li>
-            <div class="card-body">
-              <form>
-                <div class="form-group">
-                  <label for="Fname">First Name</label>
-                  <input class="form-control" type="text" ng-model="buildQuery.Fname" name="First Name" placeholder="Enter First Name" />
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Last Name</label>
-                  <input class="form-control" type="text" ng-model="buildQuery.Lname" name="Last Name" placeholder="Enter Last Name" />
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Maiden Name</label>
-                  <input class="form-control" type="text" ng-model="buildQuery.Mname" name="Maiden Name" placeholder="Enter Maiden Name" />
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Major</label>
-                  <input class="form-control" type="text" ng-model="buildQuery.Major" name="Major" placeholder="Enter Major" />
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Graduation Year</label>
-                  <input class="form-control" type="number" ng-model="buildQuery.GradYear" name="Graduation Year" placeholder="Enter Graduation Year"
-                    min="1937" />
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Minor</label>
-                  <input class="form-control" type="text" ng-model="buildQuery.Minor" name="Minor" placeholder="Enter Minor" />
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Club</label>
-                  <input class="form-control" type="text" ng-model="buildQuery.Club" name="Club" placeholder="Enter Club" />
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">City</label>
-                  <input class="form-control" type="text" ng-model="buildQuery.City" name="City" placeholder="Enter City" />
-                </div>
-                <div class="form-group">
-                  <div class="form-check">
-                    <p ng-click="buildQuery()" class="btn btn-warning mt-3">Search</p>
-                  </div>
-                </div>
-              </form>
-              <div class="table-responsive">
-                <table class="table table-bordered" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Grad Year</th>
-                      <th>Phone</th>
-                      <th>Assigned User</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Grad Year</th>
-                      <th>Phone</th>
-                      <th>Assigned User</th>
-                      <th></th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                    <tr ng-repeat="i in prospects">
-                      <td>{{ i.DONOR_FIRST_NAME }}</td>
-                      <td>{{ i.DONOR_LAST_NAME }}</td>
-                      <td>{{ i.DONOR_PREF_CLASS }} </td>
-                      <td>{{ i.UV_PHONE }}</td>
-                      <td>{{ i.AF_ASSIGNED_USER }}</td>
-                      <td>
-                        <p ng-click="assign(i.PIDM_KEY, 'rl07bebb@siena.edu')" class="btn btn-warning mt-3">Assign To Me</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+<div ng-include="'views/user/user-nav.html'">
+</div>
+<div ng-controller="MainController" class="content-wrapper" ng-init="getProspects()">
+  <div class="container-fluid">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="#">Dashboard</a>
+      </li>
+    </ol>
+    <div class="col-lg-12">
+      <div class="card mb-3">
+        <div class="card-header">
+          <li class="breadcrumb-item active">Advanced Search</li>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label for="Fname">First Name</label>
+                <input class="form-control" type="text" ng-model="buildQuery.Fname" name="First Name" placeholder="Enter First Name" />
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Example DataTables Card-->
-      <!-- /.container-fluid-->
-      <!-- /.content-wrapper-->
-      <footer class="sticky-footer">
-        <div class="container">
-          <div class="text-center">
-            <small>Copyright © Siena College Annual Fund</small>
-          </div>
-        </div>
-      </footer>
-      <!-- Scroll to Top Button-->
-      <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fa fa-angle-up"></i>
-      </a>
-      <!-- Logout Modal-->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-              <a class="btn btn-primary" href="login.html">Logout</a>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Last Name</label>
+                <input class="form-control" type="text" ng-model="buildQuery.Lname" name="Last Name" placeholder="Enter Last Name" />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Maiden Name</label>
+                <input class="form-control" type="text" ng-model="buildQuery.Mname" name="Maiden Name" placeholder="Enter Maiden Name" />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Major</label>
+                <input class="form-control" type="text" ng-model="buildQuery.Major" name="Major" placeholder="Enter Major" />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Graduation Year</label>
+                <input class="form-control" type="number" ng-model="buildQuery.GradYear" name="Graduation Year" placeholder="Enter Graduation Year"
+                  min="1937" />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Minor</label>
+                <input class="form-control" type="text" ng-model="buildQuery.Minor" name="Minor" placeholder="Enter Minor" />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Club</label>
+                <input class="form-control" type="text" ng-model="buildQuery.Club" name="Club" placeholder="Enter Club" />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">City</label>
+                <input class="form-control" type="text" ng-model="buildQuery.City" name="City" placeholder="Enter City" />
+              </div>
+              <div class="form-group">
+                <div class="form-check">
+                  <p ng-click="buildQuery()" class="btn btn-warning mt-3">Search</p>
+                </div>
+              </div>
+            </form>
+            <div class="table-responsive">
+              <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Grad Year</th>
+                    <th>Phone</th>
+                    <th>Assigned User</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Grad Year</th>
+                    <th>Phone</th>
+                    <th>Assigned User</th>
+                    <th></th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  <tr ng-repeat="i in prospects">
+                    <td>{{ i.DONOR_FIRST_NAME }}</td>
+                    <td>{{ i.DONOR_LAST_NAME }}</td>
+                    <td>{{ i.DONOR_PREF_CLASS }} </td>
+                    <td>{{ i.UV_PHONE }}</td>
+                    <td>{{ i.AF_ASSIGNED_USER }}</td>
+                    <td>
+                      <p ng-click="assign(i.PIDM_KEY, 'rl07bebb@siena.edu')" class="btn btn-warning mt-3">Assign To Me</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- Example DataTables Card-->
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>Copyright © Siena College Annual Fund</small>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+  </div>

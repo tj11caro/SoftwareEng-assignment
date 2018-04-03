@@ -71,3 +71,15 @@ app.constant("$env", {
 app.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.withCredentials = true;
 }]);
+
+//This method ensures that all modals are closed during URL changes
+app.run(function ($rootScope, $location) {
+    $rootScope.$watch(function () {
+        return $location.path();
+    },
+        function (a) {
+            $('#exampleModal').modal('hide');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+        });
+});

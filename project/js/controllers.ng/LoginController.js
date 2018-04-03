@@ -38,7 +38,6 @@ app.controller('LoginController', ['$scope', '$http', '$window', '$location', '$
             // on success
             $scope.session = new Object();
             $location.path("/");
-
         }, function (response) {
             // on error
             $location.path("/");
