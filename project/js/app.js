@@ -10,7 +10,6 @@ app.config(function ($routeProvider) {
             templateUrl: "views/admin/admin.html",
             controller: "AdminSessionController",
         })
-
         .when("/admin/view-users", {
             templateUrl: "views/admin/admin-users.html",
             controller: "AdminSessionController",
