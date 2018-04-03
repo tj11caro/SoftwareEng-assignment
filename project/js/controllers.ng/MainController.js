@@ -113,7 +113,6 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
                 $scope.tableData.page -= 1;
                 $scope.getSomeAvailableProspects();
             }
-            console.log("getSomeAvailableProspects");
             $scope.prospects = response.data;
             $scope.tableData.range = $scope.prospects.length;
         }, function (response) {

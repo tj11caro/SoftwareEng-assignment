@@ -16,7 +16,9 @@ app.controller('LoginController', ['$scope', '$http', '$window', '$location', '$
                     console.log("Got this message");
                     $location.path("/admin");
                 } else if ($scope.session.user.userType === "volunteer") {
-                    $location.path("/user");
+                    $location.path("/home");
+                } else if ($scope.session.user.userType === "developer") {
+                    $location.path("/home");
                 } else {
                     console.log("This is an error Check How Are you seeing this");
                 }

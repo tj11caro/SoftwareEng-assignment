@@ -1,5 +1,5 @@
 // A N G U L A R   C O N T R O L L E R 
-app.controller('SessionController', ['$scope', '$http', '$window', '$env', '$location', function ($scope, $http, $window, $env, $location) {
+app.controller('AdminSessionController', ['$scope', '$http', '$window', '$env', '$location', function ($scope, $http, $window, $env, $location) {
 
     $scope.back = function () {
         $window.history.back();
@@ -23,7 +23,7 @@ app.controller('SessionController', ['$scope', '$http', '$window', '$env', '$loc
             $http({
 
                 method: 'GET',
-                url: $env.apiRoot + 'UserAPI/getSession'
+                url: $env.apiRoot + 'AdminAPI/getAdminSession'
 
             }).then(function (response) {
                 // on success
@@ -37,8 +37,13 @@ app.controller('SessionController', ['$scope', '$http', '$window', '$env', '$loc
                 }
             }, function (response) {
                 // on error
-                console.log("Error in User Controller #0001", response.data, response.status);
-                $location.path("/");
+                if (response.status === 401) {
+                    console.log("You Might Not Have The Credencials To Be Here");
+                    $location.path("/home");
+                } else {
+                    console.log("Error in User Controller #0001", response.data, response.status);
+                    $location.path("/");
+                }
             });
     };
 

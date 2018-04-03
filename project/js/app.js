@@ -8,7 +8,39 @@ app.config(function ($routeProvider) {
         })
         .when("/admin", {
             templateUrl: "views/admin/admin.html",
+            controller: "AdminSessionController",
+        })
+
+        .when("/admin/view-users", {
+            templateUrl: "views/admin/admin-users.html",
+            controller: "AdminSessionController",
+        })
+        .when("/admin/reports", {
+            templateUrl: "views/admin/admin-reports.html",
+            controller: "AdminSessionController",
+        })
+        .when("/admin/prospects", {
+            templateUrl: "views/admin/admin-prospects.html",
+            controller: "AdminSessionController",
+        })
+        .when("/admin/create-admin", {
+            templateUrl: "create-admin.html",
+            controller: "AdminSessionController",
+        })
+        .when("/admin/create-volunteer", {
+            templateUrl: "signup.html",
+            controller: "AdminSessionController",
+        })
+        .when("/successful-request", {
+            templateUrl: "successful-request.html",
             controller: "SessionController",
+        })
+        .when("/admin/import", {
+            controller: function () {
+                console.log("Somthing");
+                window.location.replace('views/admin/admin-import.html');
+            },
+            template: "<div></div>"
         })
         .when("/home", {
             templateUrl: "views/user/index.html",
@@ -25,37 +57,6 @@ app.config(function ($routeProvider) {
         .when("/advanced-search", {
             templateUrl: "views/user/advancedSearch.html",
             controller: "SessionController",
-        })
-        .when("/admin/view-users", {
-            templateUrl: "views/admin/admin-users.html",
-            controller: "SessionController",
-        })
-        .when("/admin/reports", {
-            templateUrl: "views/admin/admin-reports.html",
-            controller: "SessionController",
-        })
-        .when("/admin/prospects", {
-            templateUrl: "views/admin/admin-prospects.html",
-            controller: "SessionController",
-        })
-        .when("/admin/create-admin", {
-            templateUrl: "create-admin.html",
-            controller: "SessionController",
-        })
-        .when("/admin/create-volunteer", {
-            templateUrl: "signup.html",
-            controller: "SessionController",
-        })
-        .when("/successful-request", {
-            templateUrl: "successful-request.html",
-            controller: "SessionController",
-        })
-        .when("/admin/import", {
-            controller: function () {
-                console.log("Somthing");
-                window.location.replace('views/admin/admin-import.html');
-            },
-            template: "<div></div>"
         }).otherwise({
             templateUrl: "views/404-page.html"
         });

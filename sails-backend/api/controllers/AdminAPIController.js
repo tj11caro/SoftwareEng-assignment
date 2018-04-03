@@ -6,6 +6,18 @@
  */
 
 module.exports = {
+
+    getAdminSession: function (req, res) {
+        if (!req.session.user) {
+            console.log(" req.session.user is not Defined")
+            return res.send(401, { err: "No Session Found" });
+        } else if (req.session.user.userType == "admin" || req.session.user.userType == "developer") {
+            res.json(req.session.user);
+        } else {
+            res.send(401);
+        }
+    },
+
     getUserAccounts: function (req, res) {
         User.find({}).exec(function (err, users) {
             if (err) {

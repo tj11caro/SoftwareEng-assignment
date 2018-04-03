@@ -61,7 +61,7 @@
 <body ng-app="AnnualFund" ng-controller="XlsxController" class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- ng-app="AnnualFundImport," ng-controller="XlsxController" -->
   <!-- <div ng-app="AnnualFund, AnnualFundImport"> -->
-  <p ng-hide="true" ng-controller="SessionController" ng-init="getSession()"></p>
+  <p ng-hide="true" ng-controller="AdminSessionController" ng-init="getSession()"></p>
   <!-- </div> -->
 
   <div ng-include=" 'admin-nav.html' "></div>
@@ -129,7 +129,7 @@
 
   <!-- Controllers -->
   <script src="../../js/controllers.ng/XlsxController.js "></script>
-  <script src="../../js/controllers.ng/SessionController.js "></script>
+  <script src="../../js/controllers.ng/AdminSessionController.js "></script>
   <script src="../../js/controllers.ng/LoginController.js "></script>
 </body>
 
