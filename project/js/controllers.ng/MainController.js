@@ -28,17 +28,19 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
 
     //This function currently takes in a pidm, and a username/email and writes the username/email to the pidm's prospect in the database. 
     //It then refreshes prospects variable with the getProspects() function 
-    $scope.postAssignUser = function (pidmParam, userParam) {
+    $scope.postAssignUser = function (pidmParam) {
         $http.post(
-            $env.apiRoot + "VounteerAPI/postAssignUser", {
-                'pidm': pidmParam,
-                'user': userParam
+            $env.apiRoot + "VolunteerAPI/postAssignUser", {
+                'pidm': pidmParam
             }
         ).then(function (data) {
             //Success
-            $scope.getProspects();
+            console.log(data);
+            $scope.getSomeAvailableProspects();
+            console.log("Wow that worked?");
         }, function (response) {
             //Failure  
+            console.log(response.data, response.status);
         });
     };
 
@@ -49,6 +51,7 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
                 $scope.prospects = response.data;
             }, function (response) {
                 //Failure  
+                console.log(response.data, response.status);
             });
     };
 

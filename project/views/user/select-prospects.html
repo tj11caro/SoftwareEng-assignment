@@ -43,7 +43,6 @@
                   <th>Last Name</th>
                   <th>Grad Year</th>
                   <th>Phone</th>
-                  <!-- <th>Assigned User</th> -->
                   <th>Claim</th>
                 </tr>
               </thead>
@@ -53,7 +52,6 @@
                   <th>Last Name</th>
                   <th>Grad Year</th>
                   <th>Phone</th>
-                  <!-- <th>Assigned User</th> -->
                   <th>Claim</th>
                 </tr>
               </tfoot>
@@ -63,9 +61,8 @@
                   <td>{{ i.DONOR_LAST_NAME }}</td>
                   <td>{{ i.DONOR_PREF_CLASS }} </td>
                   <td>{{ i.UV_PHONE }}</td>
-                  <!-- <td>Claim</td> -->
                   <td>
-                    <p ng-click="assign(i.PIDM_KEY, 'rl07bebb@siena.edu')" class="btn btn-warning mt-3">Assign To Me</p>
+                    <p ng-click="postAssignUser(i.PIDM_KEY)" class="btn btn-warning mt-3">Assign To Me</p>
                   </td>
                 </tr>
               </tbody>

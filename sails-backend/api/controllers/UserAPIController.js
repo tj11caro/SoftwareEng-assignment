@@ -16,11 +16,9 @@ module.exports = {
     },
 
     getUserAccounts: function (req, res) {
-
         var page = req.param("page");
         var range = req.param("range");
         var start = range * (page - 1);
-        console.log("UserApi getUserAccounts", page, range, start);
         UserAPI.find({}).skip(start).limit(range).exec(function (err, users) {
             if (err) {
                 res.send(500, { error: 'Database Error ERR#0002' });
@@ -33,10 +31,8 @@ module.exports = {
         var page = req.param("page");
         var range = req.param("range");
         var start = range * (page - 1);
-        console.log("UserAPI getAvailableProspects", page, range, start);
         var query = "SELECT * FROM donordata d LEFT JOIN lafapi laf ON d.PIDM_KEY = laf.DONOR_PIDM_KEY WHERE laf.DONOR_PIDM_KEY IS NULL LIMIT ? OFFSET ?";
         DonorData.query(query, [range, start], function (err, result) {
-            console.log(result);
             res.json(result);
         });
     },

@@ -56,15 +56,37 @@ module.exports = {
 
     postAssignUser: function (req, res) {
         if (!req.session.user) {
-            console.log(" req.session.user", req.session.user, " is not Defined");
+            console.log("req.session.user", req.session.user, " is not Defined");
             var err = "No Session Variable Established. Redirecting to Login";
             return res.json(err);
         }
         var donorPidm = req.param("pidm");
+
+        DonorData.findOne({ PIDM_KEY: donorPidm }).exec(function (err, result) {
+            console.log(result);
+            console.log(donorPidm);
+            console.log(result.PIDM_KEY);
+            console.log(result.ASK_AMT);
+            console.log(result['PIDM_KEY']);
+            console.log(result['ASK_AMT']);
+            LafAPI.findOrCreate({ DONOR_PIDM_KEY: result['PIDM_KEY'] },
+                {
+                    DONOR_PIDM_KEY: result.PIDM_KEY,
+                    ASK_AMOUNT: result.ASK_AMT,
+                    AF_ASSIGNED_USER: req.session.user.pidm
+                }).exec(function (err, result) {
+                    if (err) {
+                        sails.log.error(err);
+                    }
+                    sails.log(result);
+                });
+        });
+
+
         LafAPI.update({ "DONOR_PIDM_KEY": donorPidm },
             { "AF_ASSIGNED_USER": req.session.user.pidm }).exec(function (err, results) {
-                console.log("Inside Update Lets see whats up", results);
-                res.json({ results: result });
+                console.log("Inside Update Lets see whats up");
+                res.json({ results: results });
             });
     },
 

@@ -1,5 +1,28 @@
 var app = angular.module("AnnualFund", ["ngRoute"]);
 
+app.constant("$env", {
+    // projectRoot: "http://127.0.0.1:5500/",
+    apiRoot: "http://127.0.0.1:2000/",
+    // projectRoot: "http://oraserv.cs.siena.edu/~perm_team1_2017/GitRepos/AnnualFund2017-18/project/",
+    // apiRoot: "http://oraserv.cs.siena.edu:2000/",
+});
+
+app.config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.defaults.withCredentials = true;
+}]);
+
+//This method ensures that all modals are closed during URL changes
+app.run(function ($rootScope, $location) {
+    $rootScope.$watch(function () {
+        return $location.path();
+    },
+        function (a) {
+            $('#exampleModal').modal('hide');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+        });
+});
+
 app.config(function ($routeProvider) {
     $routeProvider
         .when("/", {
@@ -58,28 +81,5 @@ app.config(function ($routeProvider) {
             controller: "SessionController",
         }).otherwise({
             templateUrl: "views/404-page.html"
-        });
-});
-
-app.constant("$env", {
-    // projectRoot: "http://127.0.0.1:5500/",
-    apiRoot: "http://127.0.0.1:2000/",
-    // projectRoot: "http://oraserv.cs.siena.edu/~perm_team1_2017/GitRepos/AnnualFund2017-18/project/",
-    // apiRoot: "http://oraserv.cs.siena.edu:2000/",
-});
-
-app.config(['$httpProvider', function ($httpProvider) {
-    $httpProvider.defaults.withCredentials = true;
-}]);
-
-//This method ensures that all modals are closed during URL changes
-app.run(function ($rootScope, $location) {
-    $rootScope.$watch(function () {
-        return $location.path();
-    },
-        function (a) {
-            $('#exampleModal').modal('hide');
-            $('body').removeClass('modal-open');
-            $('.modal-backdrop').remove();
         });
 });

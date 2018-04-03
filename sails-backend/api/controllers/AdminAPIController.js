@@ -41,7 +41,6 @@ module.exports = {
 
     submitImport: function (req, res) {
         var sample = req.param('excelData');
-        console.log(sample);
         DonorData.findOrCreate(sample).exec(function (err, result) {
             if (err) {
                 sails.log.error(err);
