@@ -19,40 +19,28 @@ module.exports = {
         });
     },
 
-    /*
-        getUserProspects: function (req, res) {
-            var userEmail = req.param("userEmail");
-            if (userEmail === undefined || userEmail === "") {
-                userEmail == "tj11caro@siena.edu"
-            }
-            TESTTABLE1.find({ "AF_ASSIGNED_USER": userEmail }).exec(function (err, result) {
-                res.json({ result: result });
-            });
-        },
-    */
 
-
-    getUserProspects: function (req, res) {
+    getMyProspects: function (req, res) {
         if (!req.session.user) {
             console.log(" req.session.user", req.session.user, " is not Defined");
             var err = "No Session Variable Established. Redirecting to Login";
             return res.json(err);
         }
-        DonorData.find({ "AF_ASSIGNED_USER": req.session.user.email }).exec(function (err, result) {
-            res.json({ result: result });
+        var page = req.param("page");
+        var range = req.param("range");
+        var start = range * (page - 1);
+        LafAPI.find({ "AF_ASSIGNED_USER": req.session.user.pidm }).skip(start).limit(range).exec(function (err, results) {
+            ids = results.map(function (obj) { return obj.DONOR_PIDM_KEY });
+            console.log(ids);
+            DonorData.find({ "PIDM_KEY": ids }).exec(function (errs, result) {
+                if (errs) {
+                    console.log(err, " and ", errs);
+                    res.send(500, { error: 'Database Error ERR#0002 =>' + err });
+                }
+                res.json(result);
+            });
         });
     },
-    /*
-        postAssignUser: function (req, res) {
-            var pidm = req.param("pidm");
-            var user = req.param("user");
-            TESTTABLE1.update({ "PIDM_KEY": pidm },
-                { "AF_ASSIGNED_USER": user }).exec(function (err, results) {
-                    console.log("Inside Update Lets see whats up", results);
-                    res.json({ results: result });
-                });
-        },
-    */
 
     postAssignUser: function (req, res) {
         if (!req.session.user) {
@@ -63,12 +51,6 @@ module.exports = {
         var donorPidm = req.param("pidm");
 
         DonorData.findOne({ PIDM_KEY: donorPidm }).exec(function (err, result) {
-            console.log(result);
-            console.log(donorPidm);
-            console.log(result.PIDM_KEY);
-            console.log(result.ASK_AMT);
-            console.log(result['PIDM_KEY']);
-            console.log(result['ASK_AMT']);
             LafAPI.findOrCreate({ DONOR_PIDM_KEY: result['PIDM_KEY'] },
                 {
                     DONOR_PIDM_KEY: result.PIDM_KEY,

@@ -10,10 +10,7 @@ app.controller('LoginController', ['$scope', '$http', '$window', '$location', '$
                 // on success
                 $scope.session = new Object();
                 $scope.session.user = response.data;
-                console.log(response.data);
-                console.log($scope.session.user);
                 if ($scope.session.user.userType === "admin") {
-                    console.log("Got this message");
                     $location.path("/admin");
                 } else if ($scope.session.user.userType === "volunteer") {
                     $location.path("/home");

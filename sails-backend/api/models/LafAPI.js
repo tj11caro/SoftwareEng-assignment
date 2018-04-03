@@ -12,8 +12,8 @@ module.exports = {
     DONOR_PIDM_KEY: { type: 'integer', size: 11, required: true, primaryKey: true, },
     ASK_AMOUNT: { type: 'String', size: 11 },
     AF_ASSIGNED_USER: { type: 'integer', size: 11, required: true },
-    NOTES: { type: "string", size: 1000 },
-    FLAGS: { type: "string", size: 100 },
+    NOTES: { type: "String", size: 1000 },
+    FLAGS: { type: "String", size: 100 },
   }
 };
 

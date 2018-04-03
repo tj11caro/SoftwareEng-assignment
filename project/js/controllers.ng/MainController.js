@@ -45,17 +45,6 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
     };
 
     //Admin Method
-    $scope.getUserProspects = function () {
-        $http.get($env.apiRoot + "VolunteerAPI/getUserProspects")
-            .then(function (response) {
-                $scope.prospects = response.data;
-            }, function (response) {
-                //Failure  
-                console.log(response.data, response.status);
-            });
-    };
-
-    //Admin Method
     $scope.getSomeProspects = function () {
         $scope.tableData = $scope.tableData == undefined ? new Object() : $scope.tableData;
         $scope.tableData.page = $scope.tableData.page || 1;
@@ -80,6 +69,7 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
 
     //Volunteer Method
     $scope.getMyProspects = function () {
+        console.log("Well ?");
         $scope.tableData = $scope.tableData == undefined ? new Object() : $scope.tableData;
         $scope.tableData.page = $scope.tableData.page || 1;
         $scope.tableData.range = $scope.tableData.range || 10;
@@ -93,6 +83,7 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
                 $scope.tableData.page -= 1;
                 $scope.getMyProspects();
             }
+            console.log(response.data);
             $scope.prospects = response.data;
             $scope.tableData.range = $scope.prospects.length;
         }, function (response) {
