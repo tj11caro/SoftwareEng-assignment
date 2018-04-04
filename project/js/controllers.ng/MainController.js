@@ -15,10 +15,6 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
                 'page': $scope.tableData.page,
             }
         ).then(function (response) {
-            if (response.data.length == 0) {
-                $scope.tableData.page -= 1;
-                $scope.getUserAccounts();
-            }
             $scope.userAccounts = response.data;
             $scope.tableData.range = $scope.userAccounts.length;
         }, function (response) {
@@ -44,6 +40,33 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
     };
 
     //Admin Method
+    $scope.getClaimedProspects = function () {
+        $scope.tableData = $scope.tableData == undefined ? new Object() : $scope.tableData;
+        $scope.tableData.page = $scope.tableData.page || 1;
+        $scope.tableData.range = $scope.tableData.range || 10;
+        $http.post(
+            $env.apiRoot + "AdminAPI/getClaimedProspects", {
+                'range': $scope.tableData.range,
+                'page': $scope.tableData.page,
+            }
+        ).then(function (response) {
+            $scope.prospects = response.data;
+            $scope.tableData.range = $scope.prospects.length;
+            for (var i = 0; i < $scope.prospects.length; i++) {
+                var date = $scope.prospects[i].createdAt;
+                date = date.split("-").join("/");
+                date = date.replace("T", " \n");
+                reg = new RegExp(/.\d\d\dZ/);
+                $scope.prospects[i].date = date.replace(reg, " Zulu");
+            }
+            console.log($scope.prospects);
+        }, function (response) {
+            // on error                
+            console.log("Error Not Reached Server");
+        });
+    };
+
+    //Admin Method
     $scope.getSomeProspects = function () {
         $scope.tableData = $scope.tableData == undefined ? new Object() : $scope.tableData;
         $scope.tableData.page = $scope.tableData.page || 1;
@@ -54,10 +77,6 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
                 'page': $scope.tableData.page,
             }
         ).then(function (response) {
-            if (response.data.length == 0) {
-                $scope.tableData.page -= 1;
-                $scope.getSomeProspects();
-            }
             $scope.prospects = response.data;
             $scope.tableData.range = $scope.prospects.length;
         }, function (response) {
@@ -77,10 +96,6 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
                 'page': $scope.tableData.page,
             }
         ).then(function (response) {
-            if (response.data.length == 0) {
-                $scope.tableData.page -= 1;
-                $scope.getMyProspects();
-            }
             console.log(response.data);
             $scope.prospects = response.data;
             $scope.tableData.range = $scope.prospects.length;
@@ -101,10 +116,6 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
                 'page': $scope.tableData.page,
             }
         ).then(function (response) {
-            if (response.data.length == 0) {
-                $scope.tableData.page -= 1;
-                $scope.getSomeAvailableProspects();
-            }
             $scope.prospects = response.data;
             $scope.tableData.range = $scope.prospects.length;
         }, function (response) {
@@ -219,6 +230,20 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
             input.push(item[i]);
         }
         return input;
+    };
+
+    $scope.submitUnclaim = function (donor_pidm, volunteer_pidm) {
+        $http.post(
+            $env.apiRoot + "AdminAPI/submitUnclaim", {
+                'donor_pidm': donor_pidm,
+                'volunteer_pidm': volunteer_pidm
+            }
+        ).then(function (response) {
+
+        }, function (response) {
+            // on error                
+            console.log("Error Not Reached Server");
+        });
     };
 }]);
 

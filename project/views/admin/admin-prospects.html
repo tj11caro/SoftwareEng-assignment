@@ -1,9 +1,5 @@
 <div ng-include="'views/admin/admin-nav.html'">
 </div>
-<!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-NOTE: Pay attention to the ng-controller. This is signifying that everything in this div has access to the variables and functions in the MainController. 
-ng-init signifies that as soon as this div is initialized, the getProspects() function is going to be called. That function populates the prospects variable. 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
 <div class="content-wrapper" ng-controller="MainController">
   <div class="container-fluid">
     <!-- Breadcrumbs-->
@@ -13,11 +9,12 @@ ng-init signifies that as soon as this div is initialized, the getProspects() fu
       </li>
       <li class="breadcrumb-item active">Prospects</li>
     </ol>
-    <!-- Example DataTables Card-->
     <div class="col-lg-12">
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table scrollable"></i> Prospect List
+          <i class="fa fa-table scrollable">
+            <a class="h4"> Prospect List</a>
+          </i>
           <form>
             <div class="row control-group pull-right ">
               <div class="col col-auto my-1">
@@ -47,7 +44,7 @@ ng-init signifies that as soon as this div is initialized, the getProspects() fu
                   <th>Ask Amount</th>
                   <th>Phone Number</th>
                   <th>Email Address</th>
-                  <th>Time Claimed</th>
+                  <!-- <th>Time Claimed</th> -->
                 </tr>
               </thead>
               <tfoot>
@@ -56,7 +53,7 @@ ng-init signifies that as soon as this div is initialized, the getProspects() fu
                   <th>Ask Amount</th>
                   <th>Phone Number</th>
                   <th>Email Address</th>
-                  <th>Time Claimed</th>
+                  <!-- <th>Time Claimed</th> -->
                 </tr>
               </tfoot>
               <tbody>
@@ -65,7 +62,7 @@ ng-init signifies that as soon as this div is initialized, the getProspects() fu
                   <td> {{i.ASK_AMT}} </td>
                   <td>{{ i.UV_PHONE }}</td>
                   <td>{{ i.PREFERRED_EMAIL_ADDRESS }} </td>
-                  <td>{{ i.AF_ASSIGNED_USER }}</td>
+                  <!-- <td>{{ i.AF_ASSIGNED_USER }}</td> -->
                 </tr>
               </tbody>
             </table>
