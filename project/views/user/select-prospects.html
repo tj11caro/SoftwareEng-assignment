@@ -19,7 +19,7 @@
             <div class="row control-group pull-right ">
               <div class="col col-auto my-1">
                 <label class="mr-sm-2" for="inlineFormCustomSelect">Donors per Page</label>
-                <select class="pull-right custom-select mr-sm-2" id="inlineFormCustomSelect" onchange="angular.element(this).scope().setRange(this,getSomeAvailableProspects)">
+                <select class="pull-right custom-select mr-sm-2" id="inlineFormCustomSelect" onchange="angular.element(this).scope().setRange(this)">
                   <option selected>10</option>
                   <option value="25">25</option>
                   <option value="50">50</option>
@@ -30,7 +30,7 @@
                 <button class="btn btn-info" ng-click="prospectPageDecrement(getSomeAvailableProspects)">Back</button>
               </div>
               <div class=" col col-auto my-1">
-                <button class="btn btn-primary" ng-click="prospectPageIncrement(getSomeAvailableProspects)">Next</button>
+                <button class="btn btn-primary" ng-click="prospectPageIncrement(getSomeAvailableProspects)">{{tableData.buttonText}}</button>
               </div>
             </div>
           </form>

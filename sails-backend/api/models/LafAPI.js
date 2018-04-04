@@ -14,6 +14,7 @@ module.exports = {
     AF_ASSIGNED_USER: { type: 'integer', size: 11, required: true },
     NOTES: { type: "String", size: 1000 },
     FLAGS: { type: "String", size: 100 },
+    DONATION_STATUS: { type: "String", size: 100 },
   }
 };
 

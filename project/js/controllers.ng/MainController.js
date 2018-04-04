@@ -3,7 +3,8 @@
 app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $http, $env) {
     $scope.tableData = new Object();
     $scope.tableData.buttonText = "Next";
-
+    $scope.activeProspect = new Object();
+    $scope.activeProspect.DONOR_FIRST_NAME = "JOhn";
     //This function populates the userAccounts variable with all the user accounts in our current test Users table. 
     $scope.getUserAccounts = function () {
         $scope.tableData.page = $scope.tableData.page || 1;
@@ -35,9 +36,7 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
             }
         ).then(function (data) {
             //Success
-            console.log(data);
             $scope.getSomeAvailableProspects();
-            console.log("Wow that worked?");
         }, function (response) {
             //Failure  
             console.log(response.data, response.status);
@@ -69,7 +68,6 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
 
     //Volunteer Method
     $scope.getMyProspects = function () {
-        console.log("Well ?");
         $scope.tableData = $scope.tableData == undefined ? new Object() : $scope.tableData;
         $scope.tableData.page = $scope.tableData.page || 1;
         $scope.tableData.range = $scope.tableData.range || 10;
@@ -114,6 +112,10 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
             console.log("Error Not Reached Server");
         });
     };
+
+    $scope.setActiveProspect = function (prospect) {
+        $scope.activeProspect = prospect;
+    }
 
     //User Method
     $scope.buildQuery = function () {
@@ -194,13 +196,14 @@ app.controller('MainController', ['$scope', '$http', '$env', function ($scope, $
     };
 
     //User Method    
-    $scope.setRange = function (element, runFunction) {
-        $scope.$apply(function ($scope) {
-            $scope.tableData.range = element.value;
-            $scope.tableData.page = 0;
-            $scope.tableData.buttonText = "Update";
-            // runFunction();
-        });
+    $scope.setRange = function (element) {
+        setTimeout(function () {
+            $scope.$apply(function ($scope) {
+                $scope.tableData.range = element.value;
+                $scope.tableData.page = 0;
+                $scope.tableData.buttonText = "Update";
+            });
+        }, 5);
     };
 
     //User Method
